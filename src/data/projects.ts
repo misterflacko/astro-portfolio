@@ -1,58 +1,57 @@
-import PhoenixIcon from '../assets/logos/Phoenix-logo.svg?raw';
+import GoogleAnalyticsIcon from '../assets/logos/GoogleAnalytics-logo.svg?raw';
 import N8nIcon from '../assets/logos/N8n-logo.svg?raw';
-import SupabaseIcon from '../assets/logos/Supabase-logo.svg?raw';
 import PosthogIcon from '../assets/logos/posthog-logo.svg?raw';
-import PythonIcon from '../assets/logos/Python-logo.svg?raw';
-import TailwindIcon from '../assets/logos/Tailwind-logo.svg?raw';
-
+import NotionIcon from '../assets/logos/Notion-logo.svg?raw';
+import WordpressIcon from '../assets/logos/Wordpress-logo.svg?raw';
+import AstroIcon from '../assets/logos/Astro-logo.svg?raw';
 
 export const projects = [
-	{
-		title: "Workflow Automation Orchestrator (n8n)",
-		techStack: "n8n • Node.js • TypeScript • PostgreSQL",
-		description: "Event‑driven workflows for data sync, notifications, and back‑office automation. Custom nodes, secrets management, retries, and metrics.",
-		ctaText: "View Repo →",
-		ctaLink: "#",
-		icon: N8nIcon
-	},
-	{
-		title: "SaaS API Starter (Auth, Billing, RBAC)",
-		techStack: "Node.js • TypeScript • PostgreSQL • Supabase • Stripe",
-		description: "Production‑ready REST/GraphQL API with JWT auth, role‑based access, Stripe subscriptions, and rate‑limited endpoints.",
-		ctaText: "Get Source < / >",
-		ctaLink: "#",
-		icon: SupabaseIcon
-	},
-	{
-		title: "Realtime Chat Service",
-		techStack: "Phoenix • WebSockets • Redis • Docker",
-		description: "Low‑latency chat with channels, presence, and backpressure handling. Includes load tests and horizontal scaling notes.",
-		ctaText: "Live Demo →",
-		ctaLink: "#",
-		icon: PhoenixIcon
-	},
-	{
-		title: "Product Analytics Pipeline",
-		techStack: "Node.js • PostHog • PostgreSQL • ClickHouse",
-		description: "Event ingestion, batching, and replay; user properties and cohorts; dashboards for funnels, retention, and feature adoption.",
-		ctaText: "Read Case Study →",
-		ctaLink: "#",
-		icon: PosthogIcon
-	},
-	{
-		title: "Data Ingestion & ETL",
-		techStack: "Python • Airflow • PostgreSQL • S3",
-		description: "Scheduled extract/transform/load with schema migrations, data quality checks, and partitioned tables for analytics.",
-		ctaText: "View Repo →",
-		ctaLink: "#",
-		icon: PythonIcon
-	},
-	{
-		title: "Design System",
-		techStack: "React • TypeScript • Tailwind CSS • Storybook",
-		description: "Accessible UI kit with tokens, theming, and testing. Published as a versioned package with changelogs and docs.",
-		ctaText: "Docs →",
-		ctaLink: "#",
-		icon: TailwindIcon
-	},
+  {
+    title: "SEO Content Hub",
+    techStack: "WordPress • Yoast SEO • Ahrefs • Google Search Console",
+    description: "Built comprehensive content hub that ranks for 500+ keywords, drives 50K+ monthly organic visits, with pillar pages and topic clusters.",
+    ctaText: "View Case Study →",
+    ctaLink: "#",
+    icon: WordpressIcon
+  },
+  {
+    title: "Marketing Automation System",
+    techStack: "n8n • HubSpot • Mailchimp • Zapier",
+    description: "Designed automated workflows for lead nurturing, email sequences, and CRM integration that improved conversion rates by 35%.",
+    ctaText: "Learn More →",
+    ctaLink: "#",
+    icon: N8nIcon
+  },
+  {
+    title: "Analytics Dashboard",
+    techStack: "Google Analytics 4 • Looker Studio • BigQuery",
+    description: "Custom marketing analytics dashboard tracking KPIs, attribution, and ROI across channels with automated reporting.",
+    ctaText: "View Demo →",
+    ctaLink: "#",
+    icon: GoogleAnalyticsIcon
+  },
+  {
+    title: "Content Performance Tracker",
+    techStack: "PostHog • Google Analytics • Custom Scripts",
+    description: "Content analytics system tracking engagement, scroll depth, conversions, and content attribution for optimization.",
+    ctaText: "Read More →",
+    ctaLink: "#",
+    icon: PosthogIcon
+  },
+  {
+    title: "Editorial Content Calendar",
+    techStack: "Notion • Airtable • Content Strategy",
+    description: "Comprehensive editorial planning system with content briefs, SEO guidelines, publishing workflows, and performance tracking.",
+    ctaText: "View Template →",
+    ctaLink: "#",
+    icon: NotionIcon
+  },
+  {
+    title: "Marketing Portfolio Site",
+    techStack: "Astro • Tailwind CSS • Netlify",
+    description: "This portfolio site built with Astro for lightning-fast performance, SEO optimization, and modern design.",
+    ctaText: "View Source →",
+    ctaLink: "https://github.com/misterflacko/astro-portfolio",
+    icon: AstroIcon
+  },
 ];

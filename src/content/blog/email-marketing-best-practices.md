@@ -1,7 +1,7 @@
 ---
 title: "Email Marketing Best Practices for Higher Engagement"
 description: "Boost your email marketing results with proven best practices. Learn subject line optimization, list segmentation, and automation strategies that drive engagement."
-pubDate: "Dec 20 2024"
+pubDate: "Dec 20 2025"
 category: "digital-marketing"
 tags: ["email-marketing", "automation", "engagement", "lead-nurturing"]
 author: "Austin"

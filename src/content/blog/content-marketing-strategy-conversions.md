@@ -1,7 +1,7 @@
 ---
 title: "Content Marketing Strategy: Creating Content That Converts"
 description: "Discover how to build a content marketing strategy that drives conversions. Learn content planning, user intent mapping, and CTA optimization techniques."
-pubDate: "Dec 22 2024"
+pubDate: "Dec 22 2025"
 category: "digital-marketing"
 tags: ["content-marketing", "conversion-optimization", "content-strategy", "copywriting"]
 author: "Austin"

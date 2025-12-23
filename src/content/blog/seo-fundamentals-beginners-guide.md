@@ -1,7 +1,7 @@
 ---
 title: "SEO Fundamentals: A Beginner's Guide to Search Engine Optimization"
 description: "Learn essential SEO fundamentals including keyword research, on-page optimization, and technical SEO basics to improve your website's search rankings."
-pubDate: "Dec 23 2024"
+pubDate: "Dec 23 2025"
 category: "digital-marketing"
 tags: ["seo", "keyword-research", "on-page-seo", "technical-seo"]
 author: "Austin"

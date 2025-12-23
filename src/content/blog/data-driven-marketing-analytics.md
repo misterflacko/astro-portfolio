@@ -1,7 +1,7 @@
 ---
 title: "Analytics and Data-Driven Marketing Decisions"
 description: "Learn to make data-driven marketing decisions using analytics. Master KPIs, Google Analytics 4, and attribution models to optimize your marketing ROI."
-pubDate: "Dec 19 2024"
+pubDate: "Dec 19 2025"
 category: "digital-marketing"
 tags: ["analytics", "data-driven-marketing", "google-analytics", "attribution"]
 author: "Austin"

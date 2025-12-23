@@ -1,30 +1,41 @@
 export const studies = [
   {
-    title: "B.S. in Computer Science",
-    institution: "State University",
+    title: "B.S. in Marketing",
+    institution: "University of Texas",
     description:
-      "Core CS foundations: data structures, algorithms, operating systems, networking, and databases; team capstone in web systems.",
+      "Foundation in marketing principles, consumer behavior, market research, and digital marketing fundamentals with focus on data-driven strategies.",
     tags: [
-      "Algorithms",
-      "Data Structures",
-      "Operating Systems",
-      "Databases",
-      "Networking",
+      "Marketing Strategy",
+      "Consumer Behavior",
+      "Market Research",
+      "Digital Marketing",
+      "Analytics",
     ],
   },
   {
-    title: "M.S. in Software Engineering",
-    institution: "Tech Institute",
+    title: "Google Analytics Certification",
+    institution: "Google",
     description:
-      "Focus on distributed systems, testing strategies, and cloud architecture; thesis on resilience patterns in microservices.",
+      "Advanced certification in Google Analytics 4, including data collection, reporting, analysis, and conversion tracking for marketing optimization.",
     tags: [
-      "Distributed Systems",
-      "Cloud Architecture",
-      "Testing",
-      "Microservices",
+      "Google Analytics 4",
+      "Data Analysis",
+      "Conversion Tracking",
+      "Reporting",
+    ],
+  },
+  {
+    title: "HubSpot Content Marketing Certification",
+    institution: "HubSpot Academy",
+    description:
+      "Comprehensive training in content strategy, creation, promotion, and analysis for inbound marketing success.",
+    tags: [
+      "Content Strategy",
+      "Inbound Marketing",
+      "SEO",
+      "Content Creation",
     ],
   },
 ];
 
 export type StudyItem = (typeof studies)[number];
-
