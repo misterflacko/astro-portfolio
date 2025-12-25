@@ -22,14 +22,14 @@ const meta = getTagMeta(tag);
     <BaseHead title={meta.title} description={meta.description} />
     <link rel="alternate" type="application/rss+xml" title={`Tag: ${tag} feed`} href={`/rss/tag/${tag}.xml`} />
   </head>
-  <body>
+  <body class="bg-background text-foreground">
     <Header />
-    <main class="mx-auto max-w-6xl px-4 py-10 space-y-6">
+    <main class="mx-auto max-w-6xl px-6 py-10 space-y-6">
       <div class="flex items-center justify-between gap-3">
-        <h1 class="text-3xl font-bold">{meta.title}</h1>
-        <a class="sw-btn-sm" href={`/rss/tag/${tag}.xml`}>Subscribe</a>
+        <h1 class="text-3xl font-normal text-foreground">{meta.title}</h1>
+        <a class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-full border border-border bg-muted/50 text-foreground hover:bg-muted hover:border-primary transition-colors" href={`/rss/tag/${tag}.xml`}>Subscribe</a>
       </div>
-      <div class="blog-grid">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {posts.map((p) => (
           <PostCard post={p} />
         ))}

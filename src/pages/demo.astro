@@ -10,10 +10,12 @@ import WorkExperience from "../components/sections/WorkExperience.astro";
 import Studies from "../components/sections/Studies.astro";
 import ProjectsSection from "../components/sections/Projects.astro";
 
-// UI components
-import Badge from "../components/ui/badge/Badge.astro";
-import Button from "../components/ui/button/Button.astro";
-import Card from "../components/ui/card/Card.astro";
+// shadcn/ui components
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+
+// Astro UI components (no shadcn equivalent)
 import FeaturedPost from "../components/ui/card/FeaturedPost.astro";
 import PostCard from "../components/ui/card/PostCard.astro";
 import Carousel from "../components/ui/carousel/Carousel.astro";
@@ -43,109 +45,125 @@ const [firstPost, secondPost, thirdPost] = posts.slice(0, 3);
   <head>
     <BaseHead title={pageTitle} description={pageDescription} />
   </head>
-  <body>
+  <body class="bg-background text-foreground">
     <Header />
-    <main class="mx-auto max-w-6xl px-4 py-10 space-y-10">
+    <main class="mx-auto max-w-6xl px-6 py-10 space-y-10">
       <section class="space-y-4">
-        <h1 class="text-4xl font-bold">{pageTitle}</h1>
-        <p class="text-lg text-[color:var(--color-text-muted)]">{pageDescription}</p>
+        <h1 class="text-4xl font-normal text-foreground">{pageTitle}</h1>
+        <p class="text-lg text-muted-foreground">{pageDescription}</p>
       </section>
 
       <!-- HeroSection -->
-      <section class="card-surface p-6 space-y-4">
-        <h2 class="text-2xl font-semibold">HeroSection</h2>
-        <HeroSection
-          title="Your Headline Goes Here!"
-          subtitle="I build softwares that brings you loyal subscribers."
-          showCTA
-          primaryCTA={{ text: 'View Projects', href: '/portfolio' }}
-          secondaryCTA={{ text: 'Read Blog', href: '/blog' }}
-        />
-      </section>
+      <Card className="overflow-hidden">
+        <CardContent className="p-6 space-y-4">
+          <h2 class="text-2xl font-medium text-foreground">HeroSection</h2>
+          <HeroSection
+            title="Your Headline Goes Here!"
+            subtitle="I build softwares that brings you loyal subscribers."
+            showCTA
+            primaryCTA={{ text: 'View Projects', href: '/portfolio' }}
+            secondaryCTA={{ text: 'Read Blog', href: '/blog' }}
+          />
+        </CardContent>
+      </Card>
 
       <!-- Badges & Buttons -->
       <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="card-surface p-6 space-y-4">
-          <h2 class="text-2xl font-semibold">Badges</h2>
-          <div class="flex flex-wrap gap-2">
-            <Badge>Default</Badge>
-            <Badge variant="accent">Accent</Badge>
-            <Badge variant="info">Info</Badge>
-            <Badge variant="success">Success</Badge>
-            <Badge variant="warning">Warning</Badge>
-            <Badge variant="error">Error</Badge>
-            <Badge variant="outline">Outline</Badge>
-          </div>
-        </div>
-        <div class="card-surface p-6 space-y-4">
-          <h2 class="text-2xl font-semibold">Buttons</h2>
-          <div class="flex flex-wrap gap-3">
-            <Button variant="primary">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="outline">Outline</Button>
-            <Button size="lg">Large</Button>
-            <Button size="sm">Small</Button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Separators -->
-      <section class="card-surface p-6 space-y-4">
-        <h2 class="text-2xl font-semibold">Separators</h2>
-        <ArrowSeparator />
-        <GlowLineSeparator />
-      </section>
-
-      <!-- Card -->
-      <section class="card-surface p-6 space-y-4">
-        <h2 class="text-2xl font-semibold">Card</h2>
         <Card>
-          <div class="p-4 space-y-2">
-            <h3 class="text-xl font-semibold">Surface card</h3>
-            <p class="text-[color:var(--color-text-secondary)]">Uses Starwind CSS vars mapped to our tokens.</p>
-          </div>
+          <CardContent className="p-6 space-y-4">
+            <h2 class="text-2xl font-medium text-foreground">Badges (shadcn)</h2>
+            <div class="flex flex-wrap gap-2">
+              <Badge>Default</Badge>
+              <Badge variant="secondary">Secondary</Badge>
+              <Badge variant="destructive">Destructive</Badge>
+              <Badge variant="outline">Outline</Badge>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-6 space-y-4">
+            <h2 class="text-2xl font-medium text-foreground">Buttons (shadcn)</h2>
+            <div class="flex flex-wrap gap-3">
+              <Button>Default</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="outline">Outline</Button>
+              <Button variant="destructive">Destructive</Button>
+            </div>
+          </CardContent>
         </Card>
       </section>
 
+      <!-- Separators -->
+      <Card>
+        <CardContent className="p-6 space-y-4">
+          <h2 class="text-2xl font-medium text-foreground">Separators</h2>
+          <ArrowSeparator />
+          <GlowLineSeparator />
+        </CardContent>
+      </Card>
+
+      <!-- Card -->
+      <Card>
+        <CardContent className="p-6 space-y-4">
+          <h2 class="text-2xl font-medium text-foreground">Card (shadcn)</h2>
+          <Card>
+            <CardContent className="p-4 space-y-2">
+              <h3 class="text-xl font-medium text-foreground">Surface card</h3>
+              <p class="text-muted-foreground">Uses shadcn/ui Card component with Tailwind classes.</p>
+            </CardContent>
+          </Card>
+        </CardContent>
+      </Card>
+
       <!-- Carousel -->
-      <section class="card-surface p-6 space-y-4">
-        <h2 class="text-2xl font-semibold">Carousel</h2>
-        <Carousel tools={logos} />
-      </section>
+      <Card>
+        <CardContent className="p-6 space-y-4">
+          <h2 class="text-2xl font-medium text-foreground">Carousel</h2>
+          <Carousel tools={logos} />
+        </CardContent>
+      </Card>
 
       <!-- Timeline -->
-      <section class="card-surface p-6 space-y-4">
-        <h2 class="text-2xl font-semibold">Timeline</h2>
-        <Timeline items={work} icons={workIcons} centered={false} />
-      </section>
+      <Card>
+        <CardContent className="p-6 space-y-4">
+          <h2 class="text-2xl font-medium text-foreground">Timeline</h2>
+          <Timeline items={work} icons={workIcons} centered={false} />
+        </CardContent>
+      </Card>
 
       <!-- Post components using content collection -->
       {firstPost && (
-        <section class="card-surface p-6 space-y-4">
-          <h2 class="text-2xl font-semibold">FeaturedPost</h2>
-          <FeaturedPost post={firstPost} readingTimeMin={4} />
-        </section>
+        <Card>
+          <CardContent className="p-6 space-y-4">
+            <h2 class="text-2xl font-medium text-foreground">FeaturedPost</h2>
+            <FeaturedPost post={firstPost} readingTimeMin={4} />
+          </CardContent>
+        </Card>
       )}
 
       {(secondPost || thirdPost) && (
-        <section class="card-surface p-6 space-y-6">
-          <h2 class="text-2xl font-semibold">PostCard</h2>
-          <div class="blog-grid">
-            {secondPost && <PostCard post={secondPost} />}
-            {thirdPost && <PostCard post={thirdPost} />}
-          </div>
-        </section>
+        <Card>
+          <CardContent className="p-6 space-y-6">
+            <h2 class="text-2xl font-medium text-foreground">PostCard</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {secondPost && <PostCard post={secondPost} />}
+              {thirdPost && <PostCard post={thirdPost} />}
+            </div>
+          </CardContent>
+        </Card>
       )}
 
       {firstPost && (
-        <section class="card-surface p-6 space-y-6">
-          <h2 class="text-2xl font-semibold">Post Meta, Nav, Share</h2>
-          <PostMeta pubDate={firstPost.data.pubDate} readingTimeMin={5} authorName={firstPost.data.author} />
-          <PostNav prev={secondPost && { id: secondPost.id, title: secondPost.data.title }} next={thirdPost && { id: thirdPost.id, title: thirdPost.data.title }} />
-          <ShareButtons title={firstPost.data.title} url={Astro.url.toString()} />
-          <BlogPagination currentPage={2} totalPages={5} />
-        </section>
+        <Card>
+          <CardContent className="p-6 space-y-6">
+            <h2 class="text-2xl font-medium text-foreground">Post Meta, Nav, Share</h2>
+            <PostMeta pubDate={firstPost.data.pubDate} readingTimeMin={5} authorName={firstPost.data.author} />
+            <PostNav prev={secondPost && { id: secondPost.id, title: secondPost.data.title }} next={thirdPost && { id: thirdPost.id, title: thirdPost.data.title }} />
+            <ShareButtons title={firstPost.data.title} url={Astro.url.toString()} />
+            <BlogPagination currentPage={2} totalPages={5} />
+          </CardContent>
+        </Card>
       )}
 
       <!-- Sections: Skills, Work, Studies, Projects -->

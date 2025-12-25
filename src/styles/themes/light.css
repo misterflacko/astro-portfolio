@@ -1,39 +1,82 @@
-/* Light theme tokens. Applied when an ancestor sets [data-theme="light"] (default) */
+/* Light theme tokens - Mach42 Style
+   Applied when [data-theme="light"] or as default */
+
 [data-theme="light"] {
-  --accent: #FF7A1A; /* brighter for light */
-  --accent-dark: #EA580C;
-  --accent-rgb: 255, 122, 26;
+  /* ═══════════════════════════════════════════════════════════════
+     BRAND COLORS - Teal Accent
+     ═══════════════════════════════════════════════════════════════ */
 
-  --black: 15, 18, 25;
-  --gray: 96, 115, 159;
-  --gray-light: 229, 233, 240;
-  --gray-dark: 34, 41, 57;
+  --accent: #12EACB;
+  --accent-hover: #0FD4B8;
+  --accent-rgb: 18, 234, 203;
 
-  --background: #ffffff;
-  --foreground: #0f1219;
-  --card: #ffffff;
-  --card-foreground: #0f1219;
-  --popover: #ffffff;
-  --popover-foreground: #0f1219;
+  /* ═══════════════════════════════════════════════════════════════
+     TEXT COLORS
+     ═══════════════════════════════════════════════════════════════ */
+
+  --text-primary: #1D2B38;
+  --text-secondary: #525E6B;
+  --text-muted: #8A929A;
+  --text-on-dark: #FFFFFF;
+
+  /* Legacy tokens */
+  --black: 29, 43, 56;
+  --gray: 82, 94, 107;
+  --gray-light: 248, 249, 250;
+  --gray-dark: 21, 31, 40;
+
+  /* ═══════════════════════════════════════════════════════════════
+     BACKGROUNDS
+     ═══════════════════════════════════════════════════════════════ */
+
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8F9FA;
+  --bg-dark: #1D2B38;
+  --bg-darker: #151F28;
+
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+  --card: var(--bg-primary);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-primary);
+  --popover-foreground: var(--text-primary);
+
+  /* ═══════════════════════════════════════════════════════════════
+     COMPONENT COLORS
+     ═══════════════════════════════════════════════════════════════ */
+
   --primary: var(--accent);
-  --primary-foreground: #ffffff;
-  --secondary: #FFB36B;
-  --secondary-foreground: #0f1219;
-  --muted: rgb(246, 247, 249);
-  --muted-foreground: rgb(96, 115, 159);
-  --accent-foreground: #0f1219;
+  --primary-foreground: var(--text-primary);
+  --secondary: var(--bg-secondary);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--bg-secondary);
+  --muted-foreground: var(--text-muted);
+  --accent-foreground: var(--text-primary);
 
-  /* Semantic Color Tokens for components */
-  --color-text-primary: rgb(var(--black));
-  --color-text-secondary: rgb(var(--gray-dark));
-  --color-text-muted: rgb(var(--gray));
-  --color-bg-primary: var(--background);
-  --color-bg-secondary: rgba(0, 0, 0, 0.03);
-  --color-bg-tertiary: rgba(0, 0, 0, 0.05);
+  /* Semantic Color Tokens */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: rgba(29, 43, 56, 0.03);
 
-  /* Borders */
-  --color-border: rgba(0, 0, 0, 0.12);
-  --color-border-light: rgba(0, 0, 0, 0.08);
+  /* ═══════════════════════════════════════════════════════════════
+     BORDERS & INPUTS
+     ═══════════════════════════════════════════════════════════════ */
+
+  --border-light: rgba(29, 43, 56, 0.1);
+  --border-medium: rgba(29, 43, 56, 0.2);
+  --color-border: var(--border-medium);
+  --color-border-light: var(--border-light);
+
+  --border: var(--border-light);
+  --input: var(--border-light);
+  --outline: var(--accent);
+
+  /* ═══════════════════════════════════════════════════════════════
+     STATUS COLORS
+     ═══════════════════════════════════════════════════════════════ */
 
   --info: #38bdf8;
   --info-foreground: #082f49;
@@ -44,9 +87,14 @@
   --error: #ef4444;
   --error-foreground: #ffffff;
 
-  --border: rgb(229, 233, 240);
-  --input: rgb(229, 233, 240);
-  --outline: var(--accent);
+  /* ═══════════════════════════════════════════════════════════════
+     SHADOWS (subtle for light mode)
+     ═══════════════════════════════════════════════════════════════ */
+
+  --shadow-sm: 0 1px 2px rgba(29, 43, 56, 0.04);
+  --shadow-md: 0 4px 6px rgba(29, 43, 56, 0.06);
+  --shadow-lg: 0 8px 15px rgba(29, 43, 56, 0.08);
+  --shadow-xl: 0 12px 25px rgba(29, 43, 56, 0.1);
+  --shadow-nav: 0 2px 20px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 2px 4px rgba(29, 43, 56, 0.04), 0 4px 8px rgba(29, 43, 56, 0.04);
 }
-
-

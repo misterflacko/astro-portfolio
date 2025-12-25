@@ -1,0 +1,52 @@
+---
+import { Card, CardContent } from '../ui/card';
+import { ArrowRight } from 'lucide-react';
+
+interface Service {
+  icon: string;
+  title: string;
+  description: string;
+  href?: string;
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  services: Service[];
+}
+
+const { title, subtitle, services } = Astro.props;
+---
+
+<section class="py-8 md:py-12">
+  {(title || subtitle) && (
+    <header class="text-center mb-10 md:mb-14">
+      {title && <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-4 tracking-tight">{title}</h2>}
+      {subtitle && <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">{subtitle}</p>}
+    </header>
+  )}
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {services.map((service) => (
+      <Card className="group bg-card/50 hover:bg-card border-border/50 hover:border-border transition-all duration-200 hover:-translate-y-0.5">
+        <CardContent className="p-6 flex flex-col h-full">
+          <div
+            class="flex items-center justify-center w-12 h-12 mb-5 rounded-xl bg-primary/10 text-primary [&>svg]:w-6 [&>svg]:h-6"
+            set:html={service.icon}
+          />
+          <h3 class="text-xl font-medium text-foreground mb-3">{service.title}</h3>
+          <p class="text-[15px] text-muted-foreground leading-relaxed flex-1">{service.description}</p>
+          {service.href && (
+            <a
+              href={service.href}
+              class="inline-flex items-center gap-1.5 mt-5 text-[15px] font-medium text-foreground hover:text-primary transition-colors group/link"
+            >
+              Learn more
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-0.5" />
+            </a>
+          )}
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+</section>

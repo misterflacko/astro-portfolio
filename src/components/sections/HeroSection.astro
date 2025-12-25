@@ -1,49 +1,331 @@
 ---
-import Button from "../ui/button/Button.astro";
+import { Button } from '../ui/button';
+import { ArrowRight } from 'lucide-react';
+import { Badge } from '../ui/badge';
+
 interface Cta {
   text: string;
   href: string;
 }
 
+interface FeaturedBanner {
+  label?: string;
+  title: string;
+  href: string;
+}
+
 interface Props {
   title: string;
+  titleHighlight?: string;
   subtitle?: string;
   showCTA?: boolean;
   primaryCTA?: Cta;
   secondaryCTA?: Cta;
+  featuredBanner?: FeaturedBanner;
+  variant?: 'full' | 'compact';
 }
 
 const {
   title,
+  titleHighlight,
   subtitle,
   showCTA = false,
   primaryCTA,
-  secondaryCTA
+  secondaryCTA,
+  featuredBanner,
+  variant = 'full'
 } = Astro.props as Props;
+
+const isFullHeight = variant === 'full';
 ---
 
-<section class="w-full py-6 md:py-10">
-  <div class="mx-auto max-w-5xl px-4 text-center">
-    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground">
-      <span class="bg-gradient-to-r from-[var(--accent)] to-[var(--accent-dark)] bg-clip-text text-transparent">{title}</span>
-    </h1>
-    {subtitle && (
-      <p class="mt-4 text-lg md:text-xl text-[color:var(--color-text-secondary)] max-w-2xl mx-auto">
-        {subtitle}
-      </p>
-    )}
-    {showCTA && (primaryCTA || secondaryCTA) && (
-      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-        {primaryCTA && (
-          <Button href={primaryCTA.href} variant="primary" size="md">{primaryCTA.text}</Button>
-        )}
-        {secondaryCTA && (
-          <Button href={secondaryCTA.href} variant="secondary" size="md">{secondaryCTA.text}</Button>
-        )}
-      </div>
-    )}
+<section class:list={["hero", { "hero--full": isFullHeight, "hero--compact": !isFullHeight }]}>
+  <!-- Animated Background -->
+  <div class="hero__bg">
+    <div class="hero__gradient"></div>
+    <div class="hero__lines">
+      <div class="hero__line hero__line--1"></div>
+      <div class="hero__line hero__line--2"></div>
+      <div class="hero__line hero__line--3"></div>
+    </div>
+    <div class="hero__glow"></div>
   </div>
-  
+
+  <!-- Content -->
+  <div class="hero__content">
+    <div class="hero__container">
+      <h1 class="hero__title">
+        {title}
+        {titleHighlight && (
+          <span class="hero__title-highlight">{titleHighlight}</span>
+        )}
+      </h1>
+      {subtitle && (
+        <p class="hero__subtitle">{subtitle}</p>
+      )}
+      {showCTA && (primaryCTA || secondaryCTA) && (
+        <div class="hero__cta">
+          {primaryCTA && (
+            <a href={primaryCTA.href}>
+              <Button className="rounded-full px-7 py-6 text-base font-medium gap-2 group">
+                {primaryCTA.text}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </a>
+          )}
+          {secondaryCTA && (
+            <a href={secondaryCTA.href}>
+              <Button variant="outline" className="rounded-full px-7 py-6 text-base font-medium border-white/20 text-white hover:bg-white/10 hover:text-white">
+                {secondaryCTA.text}
+              </Button>
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- Featured Banner -->
+  {featuredBanner && (
+    <a href={featuredBanner.href} class="hero__banner group">
+      {featuredBanner.label && (
+        <Badge className="bg-primary text-primary-foreground text-xs font-semibold uppercase tracking-wide">
+          {featuredBanner.label}
+        </Badge>
+      )}
+      <span class="hero__banner-title">{featuredBanner.title}</span>
+      <ArrowRight className="h-4 w-4 text-white/50 transition-all group-hover:text-primary group-hover:translate-x-1" />
+    </a>
+  )}
 </section>
 
+<style>
+  /* Hero Container */
+  .hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background: hsl(var(--background));
+  }
 
+  .hero--full {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .hero--compact {
+    min-height: 60vh;
+    padding: 6rem 0 4rem;
+  }
+
+  /* Animated Background */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .hero__gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, hsl(var(--primary) / 0.15), transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 60%, hsl(var(--primary) / 0.08), transparent 40%),
+      radial-gradient(ellipse 50% 30% at 20% 80%, hsl(var(--primary) / 0.06), transparent 30%);
+    animation: gradientPulse 8s ease-in-out infinite;
+  }
+
+  @keyframes gradientPulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  .hero__lines {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .hero__line {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      hsl(var(--primary) / 0.3) 20%,
+      hsl(var(--primary) / 0.5) 50%,
+      hsl(var(--primary) / 0.3) 80%,
+      transparent 100%
+    );
+    animation: lineFlow 6s ease-in-out infinite;
+  }
+
+  .hero__line--1 {
+    left: 20%;
+    animation-delay: 0s;
+  }
+
+  .hero__line--2 {
+    left: 50%;
+    animation-delay: 2s;
+  }
+
+  .hero__line--3 {
+    left: 80%;
+    animation-delay: 4s;
+  }
+
+  @keyframes lineFlow {
+    0%, 100% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    10%, 90% {
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(100%);
+    }
+  }
+
+  .hero__glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%);
+    filter: blur(60px);
+    animation: glowPulse 6s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+      opacity: 0.5;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+
+  /* Content */
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 4rem 1.5rem;
+  }
+
+  .hero--full .hero__content {
+    padding-bottom: 6rem;
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Typography */
+  .hero__title {
+    font-size: clamp(2.75rem, 9vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: hsl(var(--foreground));
+    margin: 0 0 1.5rem;
+    max-width: 900px;
+  }
+
+  .hero__title-highlight {
+    display: block;
+    color: hsl(var(--primary));
+  }
+
+  .hero__subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    line-height: 1.5;
+    color: hsl(var(--muted-foreground));
+    margin: 0 0 2.5rem;
+    max-width: 600px;
+  }
+
+  /* CTAs */
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  /* Featured Banner */
+  .hero__banner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: hsl(var(--muted) / 0.3);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid hsl(var(--border));
+    text-decoration: none;
+    color: hsl(var(--foreground));
+    transition: background-color 0.2s ease;
+    z-index: 2;
+  }
+
+  .hero__banner:hover {
+    background: hsl(var(--muted) / 0.5);
+  }
+
+  .hero__banner-title {
+    flex: 1;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: hsl(var(--foreground) / 0.9);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .hero__banner {
+      padding: 1.5rem 2rem;
+      justify-content: center;
+    }
+
+    .hero__banner-title {
+      flex: none;
+      max-width: 500px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero__content {
+      padding: 6rem 2rem;
+    }
+
+    .hero--full .hero__content {
+      padding-bottom: 8rem;
+    }
+  }
+</style>

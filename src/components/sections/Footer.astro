@@ -1,55 +1,113 @@
 ---
+import { Button } from '../ui/button';
+import { ArrowRight, Linkedin, Github } from 'lucide-react';
+
 const today = new Date();
-import contactIconRaw from "../../assets/icons/contact-icon.svg?raw";
-import Button from "../ui/button/Button.astro";
-
-function sanitizeToWhite(svg: string, size = 18) {
-  let s = svg
-    .replace(/<\?xml[\s\S]*?\?>/g, "")
-    .replace(/<!--([\s\S]*?)-->/g, "")
-    .replace(/width=\"[^\"]*\"/g, "")
-    .replace(/height=\"[^\"]*\"/g, "")
-    // Ensure shapes are visible: use white via currentColor on fill, drop strokes
-    .replace(/fill=\"[^\"]*\"/gi, 'fill="currentColor"')
-    .replace(/stroke=\"[^\"]*\"/gi, 'stroke="none"');
-  s = s.replace(/<svg([^>]*)>/, (m, attrs) => `<svg${attrs} width="${size}" height="${size}">`);
-  return s;
-}
-
-const contactIcon = sanitizeToWhite(contactIconRaw);
 const feedUrl = new URL('rss.xml', Astro.site).toString();
 const feedlyUrl = `https://feedly.com/i/subscription/feed/${feedUrl}`;
 const inoreaderUrl = `https://www.inoreader.com/?add_feed=${feedUrl}`;
 ---
 
-<footer id="contact" class="py-12 px-4 text-center">
-  <h2 class="text-2xl md:text-3xl font-semibold text-foreground">Want to work with me?</h2>
-  <p class="mt-2 text-[color:var(--color-text-muted)]">Let's build something together!</p>
-  <div class="mt-6 flex justify-center">
-    <Button href="/contact" variant="secondary" size="md" >
-      <span class="inline-flex" aria-hidden="true" set:html={contactIcon} />
-      Get in touch
-    </Button>
+<footer class="bg-[#0a0a0f] text-foreground">
+  <!-- CTA Section -->
+  <section class="py-16 md:py-24 text-center bg-gradient-to-b from-[#050508] to-[#0a0a0f]">
+    <div class="max-w-xl mx-auto px-6">
+      <h2 class="text-2xl md:text-4xl font-normal leading-tight mb-4 text-white">
+        Ready to grow your digital presence?
+      </h2>
+      <p class="text-base text-white/70 mb-8 leading-relaxed">
+        Let's discuss how strategic marketing can transform your business.
+      </p>
+      <a href="/contact">
+        <Button className="rounded-full px-8 py-6 text-base font-medium gap-2 group">
+          Get in touch
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Button>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer Main -->
+  <div class="border-t border-white/10 px-6 py-12">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-10 sm:gap-8">
+      <!-- Brand -->
+      <div class="flex flex-col gap-3">
+        <a href="/" class="inline-flex items-center gap-3 text-white text-lg font-medium no-underline group">
+          <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
+            <span class="text-primary-foreground font-bold text-sm tracking-tight">AC</span>
+          </div>
+          <span>Austin Crockett</span>
+        </a>
+        <p class="text-sm text-white/60 m-0">Digital Marketing Strategist</p>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex gap-8 sm:contents" aria-label="Footer navigation">
+        <div class="flex flex-col gap-3">
+          <h3 class="text-xs font-semibold uppercase tracking-widest text-white/50 m-0">Pages</h3>
+          <ul class="list-none m-0 p-0 flex flex-col gap-2">
+            <li><a href="/" class="text-[15px] text-white/80 no-underline hover:text-primary transition-colors">Home</a></li>
+            <li><a href="/portfolio" class="text-[15px] text-white/80 no-underline hover:text-primary transition-colors">Portfolio</a></li>
+            <li><a href="/about" class="text-[15px] text-white/80 no-underline hover:text-primary transition-colors">About</a></li>
+            <li><a href="/blog" class="text-[15px] text-white/80 no-underline hover:text-primary transition-colors">Blog</a></li>
+            <li><a href="/contact" class="text-[15px] text-white/80 no-underline hover:text-primary transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <h3 class="text-xs font-semibold uppercase tracking-widest text-white/50 m-0">Subscribe</h3>
+          <ul class="list-none m-0 p-0 flex flex-col gap-2">
+            <li><a href={feedlyUrl} target="_blank" rel="noopener noreferrer" class="text-[15px] text-white/80 no-underline hover:text-primary transition-colors">Feedly</a></li>
+            <li><a href={inoreaderUrl} target="_blank" rel="noopener noreferrer" class="text-[15px] text-white/80 no-underline hover:text-primary transition-colors">Inoreader</a></li>
+            <li><button type="button" data-copy={feedUrl} class="text-[15px] text-white/80 bg-transparent border-none p-0 cursor-pointer font-inherit text-left hover:text-primary transition-colors">Copy RSS link</button></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Social -->
+      <div class="flex flex-col gap-3">
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-white/50 m-0">Connect</h3>
+        <div class="flex gap-3">
+          <a
+            href="https://linkedin.com/in/austincrockett"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white/80 hover:bg-primary hover:text-[#0a0a0f] hover:-translate-y-0.5 transition-all"
+          >
+            <Linkedin className="h-5 w-5" />
+          </a>
+          <a
+            href="https://github.com/misterflacko"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white/80 hover:bg-primary hover:text-[#0a0a0f] hover:-translate-y-0.5 transition-all"
+          >
+            <Github className="h-5 w-5" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="max-w-6xl mx-auto mt-8 pt-8 border-t border-white/10 text-center">
+      <p class="text-sm text-white/50 m-0">&copy; {today.getFullYear()} Austin Crockett. All rights reserved.</p>
+    </div>
   </div>
-  <div class="mt-6 text-sm text-[color:var(--color-text-muted)]">Austin Crockett - Digital Marketing Expert</div>
-  <div class="mt-6 flex items-center justify-center gap-4 text-sm">
-    <a class="sw-btn-sm" href={feedlyUrl} target="_blank" rel="noopener noreferrer" aria-label="Subscribe in Feedly">Feedly</a>
-    <a class="sw-btn-sm" href={inoreaderUrl} target="_blank" rel="noopener noreferrer" aria-label="Subscribe in Inoreader">Inoreader</a>
-    <button class="sw-btn-sm" type="button" data-copy={feedUrl} aria-label="Copy RSS link">Copy RSS link</button>
-    <a class="sw-btn-sm" href="/blog/" aria-label="Browse all posts">All posts</a>
-  </div>
-  <script type="module">
-    document.addEventListener('click', (e) => {
-      const target = e.target;
-      if (!(target instanceof HTMLElement)) return;
-      if (target.matches('button[data-copy]')) {
-        const url = target.getAttribute('data-copy');
-        if (!url) return;
-        navigator.clipboard?.writeText(url);
-        const original = target.textContent || 'Copy RSS link';
-        target.textContent = 'Copied!';
-        setTimeout(() => { target.textContent = original; }, 1500);
-      }
-    });
-  </script>
 </footer>
+
+<script type="module">
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (!(target instanceof HTMLElement)) return;
+    if (target.matches('button[data-copy]')) {
+      const url = target.getAttribute('data-copy');
+      if (!url) return;
+      navigator.clipboard?.writeText(url);
+      const original = target.textContent || 'Copy RSS link';
+      target.textContent = 'Copied!';
+      setTimeout(() => { target.textContent = original; }, 1500);
+    }
+  });
+</script>

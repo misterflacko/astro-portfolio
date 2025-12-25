@@ -1,34 +1,46 @@
 ---
-import Button from "../ui/button/Button.astro";
 import { projects } from "../../data/projects";
+import { Card, CardContent } from '../ui/card';
+import { ArrowRight } from 'lucide-react';
 
 interface Props {
   title?: string;
+  subtitle?: string;
 }
 
-const { title } = Astro.props as Props;
+const { title, subtitle } = Astro.props as Props;
 ---
 
-<section class="w-full py-10">
-  <div class="mx-auto max-w-6xl px-4">
-    {title && (
-      <h2 class="text-3xl md:text-4xl font-semibold text-center mb-8 text-foreground">{title}</h2>
-    )}
+<section class="py-8 md:py-12">
+  {(title || subtitle) && (
+    <header class="text-center mb-10 md:mb-14">
+      {title && <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-4 tracking-tight">{title}</h2>}
+      {subtitle && <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">{subtitle}</p>}
+    </header>
+  )}
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {projects.map((p) => (
-        <article class="card-surface p-6 relative">
-          <div class="absolute right-4 top-4 text-[var(--accent)] [&>svg]:w-6 [&>svg]:h-6" set:html={p.icon} />
-          <h3 class="text-xl font-semibold text-foreground m-0">{p.title}</h3>
-          <p class="text-sm text-[color:var(--color-text-muted)] m-0">{p.techStack}</p>
-          <p class="mt-3 text-[color:var(--color-text-secondary)]">{p.description}</p>
-          <div class="mt-6 flex justify-center">
-            <Button href={p.ctaLink} variant="primary" size="sm">{p.ctaText}</Button>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {projects.map((p) => (
+      <Card className="group bg-card/50 hover:bg-card border-border/50 hover:border-border transition-all duration-200 hover:-translate-y-0.5">
+        <CardContent className="p-8 flex flex-col h-full">
+          <div
+            class="flex items-center justify-center w-12 h-12 mb-5 rounded-xl bg-primary/10 text-primary [&>svg]:w-6 [&>svg]:h-6"
+            set:html={p.icon}
+          />
+          <div class="flex-1">
+            <h3 class="text-xl font-medium text-foreground mb-1">{p.title}</h3>
+            <p class="text-[13px] font-medium text-primary uppercase tracking-wide mb-3">{p.techStack}</p>
+            <p class="text-[15px] text-muted-foreground leading-relaxed">{p.description}</p>
           </div>
-        </article>
-      ))}
-    </div>
+          <a
+            href={p.ctaLink}
+            class="inline-flex items-center gap-1.5 mt-6 text-[15px] font-medium text-foreground hover:text-primary transition-colors group/link"
+          >
+            {p.ctaText}
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-0.5" />
+          </a>
+        </CardContent>
+      </Card>
+    ))}
   </div>
 </section>
-
-

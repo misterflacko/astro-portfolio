@@ -4,25 +4,27 @@ import Footer from '../components/sections/Footer.astro';
 import Header from '../components/sections/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import HeroSection from '../components/sections/HeroSection.astro';
+import ServiceCards from '../components/sections/ServiceCards.astro';
+import NewsGrid from '../components/sections/NewsGrid.astro';
 import SkillsSection from '../components/sections/SkillsSection.astro';
 import { skills } from '../data/skills';
 import WorkExperience from '../components/sections/WorkExperience.astro';
 import { work } from '../data/work';
 import Studies from '../components/sections/Studies.astro';
 import { studies } from '../data/studies';
-import Carousel from '../components/ui/carousel/Carousel.astro';
-import { logos } from '../data/logos';
-import ArrowSeparator from '../components/ui/separator/ArrowSeparator.astro'
-import GlowLineSeparator from '../components/ui/separator/GlowLineSeparator.astro'
+import { getCollection } from 'astro:content';
 
-// Logos
-import astroLogo from '../assets/logos/Astro-logo.svg';
-import googleAdsLogo from '../assets/logos/GoogleAds-logo.svg';
-import posthogLogo from '../assets/logos/posthog-logo.svg';
-import notionLogo from '../assets/logos/Notion-logo.svg';
-import figmaLogo from '../assets/logos/Figma-logo.svg';
+// Get latest blog posts
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const latestPost = posts[0];
+const recentPosts = posts.slice(0, 3);
 
-// skills are imported from src/data/skills
+// Transform skills to services format
+const services = skills.slice(0, 6).map(skill => ({
+  ...skill,
+  href: '/about#skills'
+}));
 ---
 
 <!doctype html>
@@ -33,34 +35,105 @@ import figmaLogo from '../assets/logos/Figma-logo.svg';
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: 'Austin',
+      name: 'Austin Crockett',
       url: new URL('/', Astro.site).toString(),
       logo: new URL('/favicon.svg', Astro.site).toString(),
-      sameAs: [],
+      sameAs: [
+        'https://linkedin.com/in/austincrockett',
+        'https://github.com/misterflacko'
+      ],
     })} />
 	</head>
 	<body>
 		<Header />
-		<main>
+		<main class="full-width">
+      <!-- Hero Section -->
       <HeroSection
-        title="Digital Marketing Expert"
-        subtitle="I help businesses grow through SEO, content strategy, and data-driven marketing."
+        title="Digital Marketing"
+        titleHighlight="That Drives Results"
+        subtitle="I help businesses grow through strategic SEO, compelling content, and data-driven marketing insights."
         showCTA
         primaryCTA={{ text: 'View Portfolio', href: '/portfolio' }}
         secondaryCTA={{ text: 'Read Blog', href: '/blog' }}
+        featuredBanner={latestPost ? {
+          label: 'Latest Post',
+          title: latestPost.data.title,
+          href: `/blog/${latestPost.slug}`
+        } : undefined}
       />
-     
 
-    <section class="py-6">
-      <ArrowSeparator />
-      <SkillsSection title="Skills & Tools" skills={skills} />   
-      <ArrowSeparator />
-      <WorkExperience title="Work Experience" items={work} />
-      <ArrowSeparator />
-      <Studies title="Studies" items={studies} />
-      <GlowLineSeparator />
-    </section>
+      <!-- Services Section -->
+      <section class="content-section">
+        <div class="content-container">
+          <ServiceCards
+            title="Services That Accelerate Growth"
+            subtitle="Comprehensive digital marketing solutions tailored to your business goals."
+            services={services}
+          />
+        </div>
+      </section>
+
+      <!-- Latest Insights / Blog Section -->
+      {recentPosts.length > 0 && (
+        <section class="content-section content-section--alt">
+          <div class="content-container">
+            <NewsGrid
+              title="Latest Insights"
+              subtitle="Digital marketing strategies, SEO tips, and industry insights."
+              posts={recentPosts}
+            />
+          </div>
+        </section>
+      )}
+
+      <!-- Skills & Tools Section -->
+      <section class="content-section">
+        <div class="content-container">
+          <SkillsSection title="Skills & Tools" skills={skills} />
+        </div>
+      </section>
+
+      <!-- Work Experience Section -->
+      <section class="content-section content-section--alt">
+        <div class="content-container">
+          <WorkExperience title="Work Experience" items={work} />
+        </div>
+      </section>
+
+      <!-- Studies Section -->
+      <section class="content-section">
+        <div class="content-container">
+          <Studies title="Education" items={studies} />
+        </div>
+      </section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+  .content-section {
+    padding: clamp(3rem, 6vw, 6rem) 1.5rem;
+  }
+
+  .content-section--alt {
+    background: hsl(var(--muted) / 0.3);
+  }
+
+  .content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .content-section {
+      padding: clamp(4rem, 8vw, 8rem) 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .content-section {
+      padding: clamp(5rem, 10vw, 10rem) 2.5rem;
+    }
+  }
+</style>

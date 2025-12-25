@@ -1,42 +1,82 @@
-/* Base design tokens and defaults. These map to Starwind's inline theme variables. */
+/* Base design tokens - Mach42 Style Redesign */
 :root {
-  /* Brand */
-  --accent: #FF8A4C;
-  --accent-dark: #F97316;
-  --accent-rgb: 255, 138, 76;
+  /* ═══════════════════════════════════════════════════════════════
+     MACH42 COLOR PALETTE
+     Reference: https://mach42.ai/
+     ═══════════════════════════════════════════════════════════════ */
 
-  /* Neutrals (light baseline; dark overrides live in themes/dark.css) */
-  --black: 15, 18, 25;
-  --gray: 96, 115, 159;
-  --gray-light: 229, 233, 240;
-  --gray-dark: 34, 41, 57;
+  /* Brand Accent - Teal */
+  --accent: #12EACB;
+  --accent-hover: #0FD4B8;
+  --accent-rgb: 18, 234, 203;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 15px rgba(0, 0, 0, 0.12);
-  --shadow-xl: 0 12px 25px rgba(0, 0, 0, 0.16);
-  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.2);
+  /* Text Colors */
+  --text-primary: #1D2B38;       /* Deep blue-gray - headlines, important text */
+  --text-secondary: #525E6B;      /* Medium gray - body text */
+  --text-muted: #8A929A;          /* Light gray - captions, metadata */
+  --text-on-dark: #FFFFFF;        /* White text on dark backgrounds */
 
-  --box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.12),
-    0 8px 24px rgba(0, 0, 0, 0.12),
-    0 16px 32px rgba(0, 0, 0, 0.12);
+  /* Background Colors */
+  --bg-primary: #FFFFFF;          /* Main white background */
+  --bg-secondary: #F8F9FA;        /* Slightly off-white for sections */
+  --bg-dark: #1D2B38;             /* Dark footer/hero sections */
+  --bg-darker: #151F28;           /* Even darker for depth */
 
-  /* Map to Starwind token variables via inline @theme in starwind.css */
-  --background: #ffffff;
-  --foreground: #0f1219;
-  --card: #ffffff;
-  --card-foreground: #0f1219;
-  --popover: #ffffff;
-  --popover-foreground: #0f1219;
+  /* Border Colors */
+  --border-light: rgba(29, 43, 56, 0.1);
+  --border-medium: rgba(29, 43, 56, 0.2);
+
+  /* Legacy neutral tokens (for backwards compatibility) */
+  --black: 29, 43, 56;
+  --gray: 82, 94, 107;
+  --gray-light: 248, 249, 250;
+  --gray-dark: 21, 31, 40;
+
+  /* ═══════════════════════════════════════════════════════════════
+     SHADOWS - Mach42 Style (subtle, professional)
+     ═══════════════════════════════════════════════════════════════ */
+
+  --shadow-sm: 0 1px 2px rgba(29, 43, 56, 0.04);
+  --shadow-md: 0 4px 6px rgba(29, 43, 56, 0.06);
+  --shadow-lg: 0 8px 15px rgba(29, 43, 56, 0.08);
+  --shadow-xl: 0 12px 25px rgba(29, 43, 56, 0.1);
+  --shadow-2xl: 0 25px 50px rgba(29, 43, 56, 0.12);
+
+  /* Navigation shadow */
+  --shadow-nav: 0 2px 20px rgba(0, 0, 0, 0.08);
+
+  /* Card shadow */
+  --shadow-card:
+    0 2px 4px rgba(29, 43, 56, 0.04),
+    0 4px 8px rgba(29, 43, 56, 0.04);
+
+  /* ═══════════════════════════════════════════════════════════════
+     STARWIND TOKEN MAPPING
+     ═══════════════════════════════════════════════════════════════ */
+
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+  --card: var(--bg-primary);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-primary);
+  --popover-foreground: var(--text-primary);
+
+  /* Primary = Teal accent */
   --primary: var(--accent);
-  --primary-foreground: #ffffff;
-  --secondary: #FFB36B;
-  --secondary-foreground: #0f1219;
-  --muted: rgb(246, 247, 249);
-  --muted-foreground: rgb(96, 115, 159);
-  --accent-foreground: #0f1219;
+  --primary-foreground: var(--text-primary);
+
+  /* Secondary */
+  --secondary: var(--bg-secondary);
+  --secondary-foreground: var(--text-primary);
+
+  /* Muted */
+  --muted: var(--bg-secondary);
+  --muted-foreground: var(--text-muted);
+
+  /* Accent for Starwind */
+  --accent-foreground: var(--text-primary);
+
+  /* Status colors */
   --info: #7dd3fc;
   --info-foreground: #082f49;
   --success: #86efac;
@@ -45,8 +85,44 @@
   --warning-foreground: #451a03;
   --error: #ef4444;
   --error-foreground: #ffffff;
-  --border: rgb(229, 233, 240);
-  --input: rgb(229, 233, 240);
+
+  /* Border and input */
+  --border: var(--border-light);
+  --input: var(--border-light);
   --outline: var(--accent);
+
+  /* ═══════════════════════════════════════════════════════════════
+     SPACING & SIZING
+     ═══════════════════════════════════════════════════════════════ */
+
   --radius: 0.75rem;
+  --radius-pill: 60px;            /* For pill buttons/nav */
+  --radius-button: 50px;          /* For CTA buttons */
+
+  /* Section spacing */
+  --section-padding-y: clamp(4rem, 8vw, 8rem);
+  --container-max: 1200px;
+
+  /* ═══════════════════════════════════════════════════════════════
+     TYPOGRAPHY SCALE (Mach42 inspired)
+     ═══════════════════════════════════════════════════════════════ */
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Heading sizes - large, impactful like Mach42 */
+  --text-h1: clamp(3rem, 6vw, 4.875rem);      /* 48px to 78px */
+  --text-h2: clamp(2rem, 4vw, 3.125rem);      /* 32px to 50px */
+  --text-h3: clamp(1.5rem, 2.5vw, 2rem);      /* 24px to 32px */
+  --text-h4: clamp(1.25rem, 2vw, 1.5rem);     /* 20px to 24px */
+
+  /* Body text */
+  --text-body: 1rem;                          /* 16px */
+  --text-body-lg: 1.125rem;                   /* 18px */
+  --text-small: 0.875rem;                     /* 14px */
+
+  /* Line heights */
+  --leading-tight: 1.19;          /* H1 */
+  --leading-snug: 1.2;            /* H2-H3 */
+  --leading-normal: 1.4;          /* Body */
+  --leading-relaxed: 1.6;         /* Long-form content */
 }

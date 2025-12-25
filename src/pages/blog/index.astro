@@ -1,49 +1,140 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/sections/Footer.astro';
 import Header from '../../components/sections/Header.astro';
-import BlogHero from '../../components/sections/BlogHero.astro';
-import BlogAllArticles from '../../components/sections/BlogAllArticles.astro';
+import HeroSection from '../../components/sections/HeroSection.astro';
 import BlogPagination from '../../components/ui/nav/BlogPagination.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
-import FeaturedPost from '../../components/ui/card/FeaturedPost.astro';
-import { calculateReadingTimeFromHtml } from '../../lib/reading';
+import { Card, CardContent } from '../../components/ui/card';
+import { Badge } from '../../components/ui/badge';
+import { ArrowRight } from 'lucide-react';
 
 const PAGE_SIZE = 6;
-const posts = (await getCollection('blog')).sort((a,b)=>+b.data.pubDate-+a.data.pubDate);
+const posts = (await getCollection('blog')).sort((a, b) => +b.data.pubDate - +a.data.pubDate);
 const [featured, ...rest] = posts;
 const firstPagePosts = rest.slice(0, PAGE_SIZE);
 const totalPages = Math.max(1, Math.ceil(rest.length / PAGE_SIZE));
-let featuredReading = 0;
-if (featured) {
-  const { Content } = await render(featured);
-  const html = await Astro.slots.render('default');
-  featuredReading = calculateReadingTimeFromHtml(html ?? '');
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
 }
 ---
 
 <!doctype html>
 <html lang="en" data-theme="dark" class="dark">
-	<head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  <head>
+    <BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
     {totalPages > 1 && (
       <link rel="next" href={`/blog/page/2/`} />
     )}
-	</head>
-	<body>
-        <Header />
-        <BlogHero title="Blog" subtitle="Practical insights on data analysis, visualization, and getting more from your analytics tools." />
-        <main class="use-utility-layout mx-auto max-w-5xl px-3 py-5 space-y-7">
-            {featured && (
-              <section class="card-surface p-4 md:p-5 hover-lift sw-featured-card">
-                <FeaturedPost post={featured} readingTimeMin={featuredReading} />
-              </section>
-            )}
+  </head>
+  <body>
+    <Header />
+    <main class="full-width">
+      <!-- Hero Section -->
+      <HeroSection
+        title="Digital Marketing"
+        titleHighlight="Insights"
+        subtitle="Practical strategies on SEO, content marketing, analytics, and growing your digital presence."
+        variant="compact"
+      />
 
-            <BlogAllArticles posts={firstPagePosts} />
-            <BlogPagination currentPage={1} totalPages={totalPages} />
-        </main>
-        <Footer />
-	</body>
+      <!-- Featured Post -->
+      {featured && (
+        <section class="py-12 md:py-16 lg:py-20 bg-background">
+          <div class="max-w-6xl mx-auto px-6">
+            <a href={`/blog/${featured.slug}`} class="group block">
+              <Card className="overflow-hidden bg-card/50 hover:bg-card border-border/50 hover:border-border transition-all duration-200 hover:-translate-y-0.5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+                  {featured.data.heroImage && (
+                    <div class="aspect-[16/10] overflow-hidden">
+                      <img
+                        src={featured.data.heroImage}
+                        alt={featured.data.title}
+                        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                        loading="eager"
+                      />
+                    </div>
+                  )}
+                  <CardContent className="flex flex-col justify-center p-8">
+                    <Badge className="self-start mb-4 bg-primary text-primary-foreground text-xs font-semibold uppercase tracking-wide">
+                      Featured
+                    </Badge>
+                    <h2 class="text-2xl md:text-3xl font-semibold leading-tight text-foreground mb-4 tracking-tight">
+                      {featured.data.title}
+                    </h2>
+                    {featured.data.description && (
+                      <p class="text-base text-muted-foreground leading-relaxed mb-6 line-clamp-3">
+                        {featured.data.description}
+                      </p>
+                    )}
+                    <time class="text-sm text-muted-foreground" datetime={featured.data.pubDate.toISOString()}>
+                      {formatDate(featured.data.pubDate)}
+                    </time>
+                  </CardContent>
+                </div>
+              </Card>
+            </a>
+          </div>
+        </section>
+      )}
+
+      <!-- All Articles -->
+      <section class="py-12 md:py-16 lg:py-20 bg-muted/30">
+        <div class="max-w-6xl mx-auto px-6">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-10 md:mb-14 tracking-tight">
+            Latest Articles
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {firstPagePosts.map((post) => (
+              <Card className="group overflow-hidden bg-card/50 hover:bg-card border-border/50 hover:border-border transition-all duration-200 hover:-translate-y-0.5">
+                {post.data.heroImage && (
+                  <a href={`/blog/${post.slug}`} class="block aspect-video overflow-hidden">
+                    <img
+                      src={post.data.heroImage}
+                      alt={post.data.title}
+                      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      loading="lazy"
+                    />
+                  </a>
+                )}
+                <CardContent className="p-6 flex flex-col flex-1">
+                  <time class="text-[13px] font-medium text-primary uppercase tracking-wide mb-3" datetime={post.data.pubDate.toISOString()}>
+                    {formatDate(post.data.pubDate)}
+                  </time>
+                  <h3 class="text-lg font-medium leading-snug mb-3">
+                    <a href={`/blog/${post.slug}`} class="text-foreground hover:text-primary transition-colors">
+                      {post.data.title}
+                    </a>
+                  </h3>
+                  {post.data.description && (
+                    <p class="text-[15px] text-muted-foreground leading-relaxed flex-1 line-clamp-3">
+                      {post.data.description}
+                    </p>
+                  )}
+                  <a href={`/blog/${post.slug}`} class="inline-flex items-center gap-1.5 mt-4 text-sm font-medium text-foreground hover:text-primary transition-colors group/link">
+                    Read more
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-0.5" />
+                  </a>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {totalPages > 1 && (
+            <div class="mt-12 flex justify-center">
+              <BlogPagination currentPage={1} totalPages={totalPages} />
+            </div>
+          )}
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>

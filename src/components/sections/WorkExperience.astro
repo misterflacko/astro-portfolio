@@ -18,10 +18,10 @@ interface Props {
 const { items, title } = Astro.props as Props;
 ---
 
-<section class="w-full py-8">
+<section class="w-full py-8 md:py-12">
   <div class="mx-auto max-w-6xl px-5 md:px-6">
     {title && (
-      <h2 class="text-3xl md:text-4xl font-semibold text-center mb-10 text-foreground">{title}</h2>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-10 md:mb-14 text-foreground tracking-tight">{title}</h2>
     )}
 
     <Timeline items={items} icons={workIcons} centered={false}/>

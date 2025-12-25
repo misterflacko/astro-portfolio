@@ -1,76 +1,117 @@
-/* Dark theme tokens. Applied when an ancestor sets [data-theme="dark"] or .dark */
+/* Dark theme tokens - Mach42 Style
+   Applied when [data-theme="dark"] or .dark */
+
 [data-theme="dark"],
 .dark {
-  /* Primary Brand Colors (Flowing Orange) */
-  --accent: #FF8A4C;
-  --accent-dark: #F97316;
-  --accent-rgb: 255, 138, 76;
+  /* ═══════════════════════════════════════════════════════════════
+     BRAND COLORS - Teal Accent (slightly brighter for dark mode)
+     ═══════════════════════════════════════════════════════════════ */
 
-  /* Neutral Colors */
+  --accent: #14F5D6;
+  --accent-hover: #12EACB;
+  --accent-rgb: 20, 245, 214;
+
+  /* ═══════════════════════════════════════════════════════════════
+     TEXT COLORS (inverted for dark mode)
+     ═══════════════════════════════════════════════════════════════ */
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #B8C1CC;
+  --text-muted: #7A8899;
+  --text-on-dark: #FFFFFF;
+
+  /* Legacy tokens (inverted) */
   --black: 255, 255, 255;
-  --gray: 171, 178, 191;
-  --gray-light: 40, 44, 52;
-  --gray-dark: 220, 223, 228;
-  --background: #050505;
+  --gray: 184, 193, 204;
+  --gray-light: 30, 40, 50;
+  --gray-dark: 200, 210, 220;
+
+  /* ═══════════════════════════════════════════════════════════════
+     BACKGROUNDS (Mach42 dark palette)
+     ═══════════════════════════════════════════════════════════════ */
+
+  --bg-primary: #0D1117;
+  --bg-secondary: #151B23;
+  --bg-dark: #1D2B38;
+  --bg-darker: #0A0E13;
+
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+  --card: rgba(255, 255, 255, 0.04);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-secondary);
+  --popover-foreground: var(--text-primary);
+
+  /* ═══════════════════════════════════════════════════════════════
+     COMPONENT COLORS
+     ═══════════════════════════════════════════════════════════════ */
+
+  --primary: var(--accent);
+  --primary-foreground: #0D1117;
+  --secondary: var(--bg-secondary);
+  --secondary-foreground: var(--text-primary);
+  --muted: rgba(255, 255, 255, 0.06);
+  --muted-foreground: var(--text-muted);
+  --accent-foreground: #0D1117;
 
   /* Semantic Color Tokens */
-  --color-text-primary: rgb(var(--black));
-  --color-text-secondary: rgb(var(--gray-dark));
-  --color-text-muted: rgb(var(--gray));
-  --color-bg-primary: var(--background);
-  --color-bg-secondary: rgba(255, 255, 255, 0.05);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
   --color-bg-tertiary: rgba(255, 255, 255, 0.08);
-  --color-border: rgba(var(--gray-light), 0.3);
-  --color-border-light: rgba(var(--gray-light), 0.1);
   --color-accent-text: var(--accent);
-  --color-accent-bg: rgba(var(--accent), 0.15);
+  --color-accent-bg: rgba(var(--accent-rgb), 0.15);
 
-  /* Translucent surfaces */
-  --surface-100: rgba(255, 255, 255, 0.05);
-  --surface-200: rgba(255, 255, 255, 0.08);
-  --surface-300: rgba(255, 255, 255, 0.12);
+  /* ═══════════════════════════════════════════════════════════════
+     TRANSLUCENT SURFACES
+     ═══════════════════════════════════════════════════════════════ */
 
-  /* Shadows (heavier for dark mode) */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.18);
-  --shadow-md: 0 6px 14px rgba(0, 0, 0, 0.28);
-  --shadow-lg: 0 10px 28px rgba(0, 0, 0, 0.35);
-  --shadow-xl: 0 18px 44px rgba(0, 0, 0, 0.42);
-  --shadow-2xl: 0 30px 80px rgba(0, 0, 0, 0.5);
+  --surface-100: rgba(255, 255, 255, 0.04);
+  --surface-200: rgba(255, 255, 255, 0.06);
+  --surface-300: rgba(255, 255, 255, 0.08);
 
-  /* Component Specific Shadows */
-  --box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.4),
-    0 8px 24px rgba(0, 0, 0, 0.2),
-    0 16px 32px rgba(0, 0, 0, 0.2);
+  /* ═══════════════════════════════════════════════════════════════
+     BORDERS & INPUTS
+     ═══════════════════════════════════════════════════════════════ */
 
-  /* Map to Starwind token variables */
-  --background: #1E1E1E;
-  --foreground: rgb(243, 244, 246);
-  /* Translucent card surface on dark bg */
-  --card: rgba(255, 255, 255, 0.04);
-  --card-foreground: rgb(243, 244, 246);
-  --popover: #282c34;
-  --popover-foreground: rgb(243, 244, 246);
-  --primary: #FF8A4C;
-  --primary-foreground: #0f1219;
-  --secondary: #FFB36B;
-  --secondary-foreground: rgb(243, 244, 246);
-  --muted: rgba(255, 255, 255, 0.06);
-  --muted-foreground: rgb(171, 178, 191);
-  --accent-foreground: #0f1219;
-  /* Semantic colors from old project */
-  --success: #10b981;
-  --warning: #f59e0b;
-  --error: #ef4444;
-  --info: #3b82f6;
-  --info-foreground: #082f49;
-  --success-foreground: #052e16;
-  --warning-foreground: #451a03;
-  --error-foreground: #ffffff;
-  /* Slightly softer borders on translucent surfaces */
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.15);
+  --color-border: var(--border-medium);
+  --color-border-light: var(--border-light);
+
   --border: var(--surface-300);
   --input: var(--surface-300);
-  --outline: #F97316;
+  --outline: var(--accent);
+
+  /* ═══════════════════════════════════════════════════════════════
+     STATUS COLORS (adjusted for dark mode)
+     ═══════════════════════════════════════════════════════════════ */
+
+  --info: #3b82f6;
+  --info-foreground: #dbeafe;
+  --success: #10b981;
+  --success-foreground: #d1fae5;
+  --warning: #f59e0b;
+  --warning-foreground: #fef3c7;
+  --error: #ef4444;
+  --error-foreground: #ffffff;
+
+  /* ═══════════════════════════════════════════════════════════════
+     SHADOWS (deeper for dark mode)
+     ═══════════════════════════════════════════════════════════════ */
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.6);
+  --shadow-nav: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 8px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
+
+  /* Card hover glow with teal accent */
+  --shadow-card-hover:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(var(--accent-rgb), 0.15);
 }
-
-

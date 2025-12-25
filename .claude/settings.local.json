@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(xargs cat:*)",
+      "mcp__plugin_claude-code-settings_chrome__new_page",
+      "mcp__plugin_claude-code-settings_chrome__take_snapshot",
+      "mcp__plugin_claude-code-settings_chrome__take_screenshot",
+      "mcp__plugin_claude-code-settings_chrome__evaluate_script",
+      "mcp__plugin_claude-code-settings_chrome__navigate_page",
+      "Bash(npm run build:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:ui.shadcn.com)",
+      "WebSearch",
+      "mcp__morph-mcp__warpgrep_codebase_search",
+      "Bash(dir \"%USERPROFILE%\\\\.claude\")",
+      "Bash(ls -la \"C:\\\\Users\\\\austi\\\\.claude\"\" 2>/dev/null || dir \"C:Usersausti.claude\" 2>nul || echo \"Checking claude directory \")",
+      "Bash(ls:*)",
+      "Bash(npx shadcn@latest mcp init:*)",
+      "Skill(shadcn-ui-expert)",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__get-library-docs",
+      "Bash(node:*)",
+      "Bash(npx shadcn@latest init:*)",
+      "Bash(npx shadcn@latest add:*)",
+      "mcp__morph-mcp__edit_file",
+      "Bash(npm install:*)",
+      "Bash(npx astro add react --yes)",
+      "Bash(npm run dev:*)",
+      "mcp__plugin_claude-code-settings_chrome__click",
+      "mcp__plugin_claude-code-settings_chrome__resize_page"
+    ]
+  }
+}

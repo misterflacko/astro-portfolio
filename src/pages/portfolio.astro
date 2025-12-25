@@ -4,23 +4,40 @@ import Header from "../components/sections/Header.astro";
 import Footer from "../components/sections/Footer.astro";
 import Projects from "../components/sections/Projects.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
-import GlowLineSeparator from "../components/ui/separator/GlowLineSeparator.astro";
+
+const pageTitle = "Portfolio";
+const pageDescription = "Marketing campaigns, SEO strategies, and growth initiatives by Austin Crockett";
 ---
 
-
+<!doctype html>
 <html lang="en" data-theme="dark" class="dark">
   <head>
-    <BaseHead title="Portfolio" description="Marketing campaigns, SEO strategies, and growth initiatives by Austin Crockett" />
+    <BaseHead title={`${pageTitle} | Austin Crockett`} description={pageDescription} />
   </head>
-  <body>
+  <body class="bg-background text-foreground">
     <Header />
-    <main>
-      <HeroSection title="Selected Projects" subtitle="Marketing campaigns, SEO strategies, and growth initiatives I've led." />
-      <Projects />
-      <GlowLineSeparator />
+    <main class="full-width">
+      <!-- Hero Section -->
+      <HeroSection
+        title="Portfolio"
+        titleHighlight="Spotlight"
+        subtitle="Marketing campaigns, SEO strategies, and growth initiatives I've led."
+        showCTA
+        primaryCTA={{ text: 'Get in Touch', href: '/contact' }}
+        secondaryCTA={{ text: 'About Me', href: '/about' }}
+        variant="compact"
+      />
+
+      <!-- Projects Section -->
+      <section class="py-12 md:py-16 lg:py-20 px-6 bg-background">
+        <div class="max-w-6xl mx-auto">
+          <Projects
+            title="Featured Projects"
+            subtitle="Case studies showcasing strategic marketing and measurable results."
+          />
+        </div>
+      </section>
     </main>
     <Footer />
   </body>
 </html>
-
-

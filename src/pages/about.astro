@@ -1,27 +1,112 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
-import GlowLineSeparator from '@/components/ui/separator/GlowLineSeparator.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/sections/Footer.astro';
+import Header from '../components/sections/Header.astro';
+import HeroSection from '../components/sections/HeroSection.astro';
+import ServiceCards from '../components/sections/ServiceCards.astro';
+import { skills } from '../data/skills';
+
 const pageTitle = 'About Me';
 const pageDescription = 'Learn more about Austin Crockett - a digital marketing expert specializing in SEO, content strategy, and data-driven growth.';
+
+const coreValues = [
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>`,
+    title: "Results-Driven",
+    description: "Every strategy is measured against real business outcomes. If it doesn't move the needle, we pivot until it does."
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>`,
+    title: "Transparent",
+    description: "No black-box tactics or hidden agendas. You'll always know exactly what we're doing and why."
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>`,
+    title: "Data-Informed",
+    description: "Decisions backed by data, not assumptions. Analytics guide strategy, optimization, and iteration."
+  }
+];
 ---
 
-<Layout title={pageTitle} description={pageDescription} pubDate={new Date()} showHeader={false}>
-  <p>
-    Hey! I'm Austin, a digital marketing specialist passionate about helping businesses grow through strategic, data-driven marketing.
-  </p>
-  <p>
-    I specialize in SEO, content marketing, and analytics—combining creative strategy with measurable results. My approach focuses on understanding your audience, creating valuable content, and optimizing every touchpoint of the customer journey.
-  </p>
-  <p>
-    With experience across B2B and B2C industries, I've helped companies increase organic traffic, improve conversion rates, and build sustainable marketing systems. Whether it's a comprehensive SEO overhaul or a targeted content campaign, I focus on strategies that deliver real business outcomes.
-  </p>
-  <p>
-    I believe in marketing that respects the audience—no clickbait, no manipulation, just genuine value that builds trust and drives growth. When I'm not optimizing campaigns, you'll find me exploring the latest in marketing technology, writing about industry trends, or diving into analytics to uncover new opportunities.
-  </p>
-  <p>
-    <strong>Let's connect!</strong> Whether you're looking to improve your search visibility, develop a content strategy, or make sense of your marketing data, I'd love to hear about your challenges.
-  </p>
+<!doctype html>
+<html lang="en" data-theme="dark" class="dark">
+  <head>
+    <BaseHead title={`${pageTitle} | Austin Crockett`} description={pageDescription} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Austin Crockett',
+      jobTitle: 'Digital Marketing Strategist',
+      description: pageDescription,
+      url: new URL('/about', Astro.site).toString(),
+      sameAs: [
+        'https://linkedin.com/in/austincrockett',
+        'https://github.com/misterflacko'
+      ]
+    })} />
+  </head>
+  <body class="bg-background text-foreground">
+    <Header />
+    <main class="full-width">
+      <!-- Hero Section -->
+      <HeroSection
+        title="Results-Driven Digital"
+        titleHighlight="Marketing Strategist"
+        subtitle="Helping businesses grow through strategic SEO, compelling content, and data-driven marketing insights."
+        showCTA
+        primaryCTA={{ text: 'View Portfolio', href: '/portfolio' }}
+        secondaryCTA={{ text: 'Get in Touch', href: '/contact' }}
+        variant="compact"
+      />
 
-  <GlowLineSeparator />
+      <!-- About Content -->
+      <section class="py-12 md:py-16 lg:py-20 px-6 bg-background">
+        <div class="max-w-6xl mx-auto">
+          <div class="max-w-3xl">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-8 md:mb-10 tracking-tight">
+              The strategic approach to marketing success
+            </h2>
 
-</Layout>
+            <div class="flex flex-col gap-6">
+              <p class="text-xl leading-relaxed text-foreground">
+                Hey! I'm Austin, a digital marketing specialist passionate about helping businesses grow through strategic, data-driven marketing.
+              </p>
+              <p class="text-lg leading-relaxed text-muted-foreground">
+                I specialize in SEO, content marketing, and analytics—combining creative strategy with measurable results. My approach focuses on understanding your audience, creating valuable content, and optimizing every touchpoint of the customer journey.
+              </p>
+              <p class="text-lg leading-relaxed text-muted-foreground">
+                With experience across B2B and B2C industries, I've helped companies increase organic traffic, improve conversion rates, and build sustainable marketing systems. Whether it's a comprehensive SEO overhaul or a targeted content campaign, I focus on strategies that deliver real business outcomes.
+              </p>
+              <p class="text-lg leading-relaxed text-muted-foreground">
+                I believe in marketing that respects the audience—no clickbait, no manipulation, just genuine value that builds trust and drives growth.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Values -->
+      <section class="py-12 md:py-16 lg:py-20 px-6 bg-muted/30">
+        <div class="max-w-6xl mx-auto">
+          <ServiceCards
+            title="Core Values"
+            subtitle="The principles that guide every strategy and decision."
+            services={coreValues}
+          />
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="py-12 md:py-16 lg:py-20 px-6 bg-background" id="skills">
+        <div class="max-w-6xl mx-auto">
+          <ServiceCards
+            title="Expertise"
+            subtitle="Comprehensive digital marketing capabilities."
+            services={skills.map(s => ({ ...s, href: undefined }))}
+          />
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

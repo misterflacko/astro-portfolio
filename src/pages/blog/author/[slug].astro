@@ -24,11 +24,11 @@ const authorName = posts[0]?.data.author || 'Site Author';
   <head>
     <BaseHead title={`Articles by ${authorName}`} description={`Posts written by ${authorName}`} />
   </head>
-  <body>
+  <body class="bg-background text-foreground">
     <Header />
-    <main class="mx-auto max-w-6xl px-4 py-10 space-y-6">
-      <h1 class="text-3xl font-bold">Articles by {authorName}</h1>
-      <div class="blog-grid">
+    <main class="mx-auto max-w-6xl px-6 py-10 space-y-6">
+      <h1 class="text-3xl font-normal text-foreground">Articles by {authorName}</h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {posts.map((p) => (
           <PostCard post={p} />
         ))}
