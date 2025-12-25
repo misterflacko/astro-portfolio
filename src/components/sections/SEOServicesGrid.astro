@@ -1,0 +1,222 @@
+---
+import { Search, FileText, Bot, Code, Gauge } from 'lucide-react';
+
+interface ServiceColumn {
+  icon: any;
+  title: string;
+  description: string;
+  items: string[];
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+
+const services: ServiceColumn[] = [
+  {
+    icon: FileText,
+    title: "Editorial SEO",
+    description: "Content that ranks and resonates",
+    items: [
+      "Content Strategy & Planning",
+      "Blog Post Optimization",
+      "Topic Cluster Development",
+      "E-E-A-T Enhancement"
+    ]
+  },
+  {
+    icon: Code,
+    title: "Technical SEO",
+    description: "Building a solid foundation",
+    items: [
+      "Site Architecture",
+      "Core Web Vitals",
+      "Schema Markup",
+      "Crawl Optimization"
+    ]
+  },
+  {
+    icon: Bot,
+    title: "GEO & AEO",
+    description: "Optimization for AI-powered search",
+    items: [
+      "LLM Content Optimization",
+      "AI Citation Strategy",
+      "Answer Engine Visibility",
+      "Structured Data for AI"
+    ]
+  },
+  {
+    icon: Search,
+    title: "Programmatic",
+    description: "Scalable search presence",
+    items: [
+      "Template Optimization",
+      "Dynamic Content SEO",
+      "Category Page Strategy",
+      "Local SEO at Scale"
+    ]
+  },
+  {
+    icon: Gauge,
+    title: "Performance",
+    description: "Measuring what matters",
+    items: [
+      "Analytics & Tracking",
+      "Conversion Optimization",
+      "Ranking Monitoring",
+      "ROI Reporting"
+    ]
+  }
+];
+---
+
+<section class="seo-services">
+  {(title || subtitle) && (
+    <div class="seo-services-header">
+      {title && <h2 class="seo-services-title">{title}</h2>}
+      {subtitle && <p class="seo-services-subtitle">{subtitle}</p>}
+    </div>
+  )}
+
+  <div class="seo-services-grid">
+    {services.map((service) => (
+      <div class="service-column">
+        <div class="service-icon">
+          <service.icon className="h-6 w-6" />
+        </div>
+        <h3 class="service-title">{service.title}</h3>
+        <p class="service-description">{service.description}</p>
+        <ul class="service-items">
+          {service.items.map((item) => (
+            <li class="service-item">{item}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .seo-services {
+    width: 100%;
+  }
+
+  .seo-services-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .seo-services-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .seo-services-subtitle {
+    font-size: 1rem;
+    color: hsl(var(--muted-foreground));
+    margin: 0;
+    max-width: 700px;
+    margin-inline: auto;
+    line-height: 1.6;
+  }
+
+  .seo-services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .seo-services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .seo-services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .seo-services-grid {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  .service-column {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+  }
+
+  .service-column:hover {
+    border-color: hsl(var(--primary));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -4px hsl(var(--primary) / 0.1);
+  }
+
+  .service-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background: hsl(var(--primary) / 0.1);
+    border-radius: 0.75rem;
+    color: hsl(var(--primary));
+    margin-bottom: 1rem;
+  }
+
+  .service-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin: 0 0 0.5rem;
+  }
+
+  .service-description {
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+    margin: 0 0 1rem;
+    line-height: 1.5;
+  }
+
+  .service-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .service-item {
+    font-size: 0.8125rem;
+    color: hsl(var(--foreground) / 0.8);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .service-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: hsl(var(--primary));
+  }
+</style>

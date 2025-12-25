@@ -1,0 +1,102 @@
+# Austin Crockett | SEO & GEO Specialist
+
+> SEO and Generative Engine Optimization (GEO) specialist helping brands stay visible across Google, AI search engines, and LLM-powered platforms.
+
+## About
+
+Austin Crockett is an SEO and Generative Engine Optimization (GEO) specialist with expertise in traditional search optimization and emerging AI-powered discovery platforms. With experience across content strategy, technical SEO, and answer engine optimization (AEO), Austin helps brands maintain visibility across Google, ChatGPT, Perplexity, and other AI search surfaces.
+
+## Services
+
+### Editorial SEO
+Content that ranks and resonates:
+- Content Strategy & Planning
+- Blog Post Optimization
+- Topic Cluster Development
+- E-E-A-T Enhancement
+
+### Technical SEO
+Building a solid foundation:
+- Site Architecture
+- Core Web Vitals
+- Schema Markup
+- Crawl Optimization
+
+### GEO & AEO (Generative Engine Optimization & Answer Engine Optimization)
+Optimization for AI-powered search:
+- LLM Content Optimization
+- AI Citation Strategy
+- Answer Engine Visibility
+- Structured Data for AI
+
+### Programmatic SEO
+Scalable search presence:
+- Template Optimization
+- Dynamic Content SEO
+- Category Page Strategy
+- Local SEO at Scale
+
+### Performance Analytics
+Measuring what matters:
+- Analytics & Tracking
+- Conversion Optimization
+- Ranking Monitoring
+- ROI Reporting
+
+## Process
+
+### 01. Discovery & Audit
+Deep-dive into your current digital presence, competitive landscape, and business goals to identify opportunities for growth.
+
+### 02. Strategy Development
+Craft a data-driven roadmap combining SEO, content, and emerging AI-powered search strategies tailored to your market.
+
+### 03. Implementation
+Execute technical optimizations, content creation, and GEO (Generative Engine Optimization) enhancements for maximum visibility.
+
+### 04. Measure & Optimize
+Continuously monitor performance across traditional search and AI-powered platforms, iterating based on real data.
+
+## Skills & Expertise
+
+- SEO & Search Marketing
+- Content Marketing
+- Social Media Marketing
+- Email Marketing
+- Analytics & Data
+- Digital Strategy
+
+## Contact
+
+For inquiries about SEO, GEO, or digital marketing services:
+- Website: https://ac-seo-marketing-portfolio.netlify.app
+- LinkedIn: https://linkedin.com/in/austincrockett
+- GitHub: https://github.com/misterflacko
+
+## Key Concepts
+
+### Generative Engine Optimization (GEO)
+GEO is the practice of optimizing content to be cited and referenced by AI-powered search engines and large language models (LLMs) like ChatGPT, Claude, Perplexity, and Google's AI Overviews. As search evolves beyond traditional blue links, GEO ensures brands remain visible in AI-generated responses.
+
+### Answer Engine Optimization (AEO)
+AEO focuses on structuring content to directly answer user queries in a format that AI systems can easily parse and cite. This includes optimizing for featured snippets, knowledge panels, and AI-generated answers.
+
+### The AI Search Revolution
+The search landscape is evolving rapidly. Traditional SEO remains important, but forward-thinking brands must also optimize for:
+- ChatGPT and other conversational AI
+- Perplexity and AI-native search engines
+- Google AI Overviews and SGE
+- Voice assistants and smart devices
+- Industry-specific AI tools
+
+## Site Structure
+
+- Home: /
+- Portfolio: /portfolio
+- About: /about
+- Blog: /blog
+- Contact: /contact
+
+---
+
+This content is optimized for AI readability and citation. Last updated: December 2025.

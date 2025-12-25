@@ -1,0 +1,139 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/sections/Header.astro";
+import Footer from "../components/sections/Footer.astro";
+import { getCollection } from 'astro:content';
+
+const pageTitle = "Sitemap";
+const pageDescription = "Complete site map of Austin Crockett's SEO and GEO specialist portfolio website.";
+
+// Get all blog posts
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Get all portfolio projects
+const projects = (await getCollection('projects'))
+  .sort((a, b) => (b.data.date?.valueOf() || 0) - (a.data.date?.valueOf() || 0));
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark" class="dark">
+  <head>
+    <BaseHead title={`${pageTitle} | Austin Crockett`} description={pageDescription} />
+    <style>
+      .sitemap-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+      }
+
+      .sitemap-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: hsl(var(--foreground));
+        margin: 0 0 2rem;
+      }
+
+      .sitemap-section {
+        margin-bottom: 2.5rem;
+      }
+
+      .sitemap-section-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: hsl(var(--foreground));
+        margin: 0 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid hsl(var(--border));
+      }
+
+      .sitemap-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .sitemap-item {
+        margin-bottom: 0.5rem;
+      }
+
+      .sitemap-link {
+        color: hsl(var(--foreground) / 0.8);
+        text-decoration: none;
+        font-size: 0.9375rem;
+        transition: color 0.2s ease;
+      }
+
+      .sitemap-link:hover {
+        color: hsl(var(--primary));
+      }
+
+      .sitemap-meta {
+        font-size: 0.8125rem;
+        color: hsl(var(--muted-foreground));
+        margin-left: 0.5rem;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-foreground">
+    <Header />
+    <main>
+      <div class="sitemap-container">
+        <h1 class="sitemap-title">Sitemap</h1>
+
+        <!-- Main Pages -->
+        <section class="sitemap-section">
+          <h2 class="sitemap-section-title">Main Pages</h2>
+          <ul class="sitemap-list">
+            <li class="sitemap-item"><a href="/" class="sitemap-link">Home</a></li>
+            <li class="sitemap-item"><a href="/portfolio" class="sitemap-link">Portfolio</a></li>
+            <li class="sitemap-item"><a href="/about" class="sitemap-link">About</a></li>
+            <li class="sitemap-item"><a href="/blog" class="sitemap-link">Blog</a></li>
+            <li class="sitemap-item"><a href="/contact" class="sitemap-link">Contact</a></li>
+          </ul>
+        </section>
+
+        <!-- Blog Posts -->
+        {posts.length > 0 && (
+          <section class="sitemap-section">
+            <h2 class="sitemap-section-title">Blog Posts</h2>
+            <ul class="sitemap-list">
+              {posts.map((post) => (
+                <li class="sitemap-item">
+                  <a href={`/blog/${post.slug}`} class="sitemap-link">{post.data.title}</a>
+                  <span class="sitemap-meta">
+                    {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <!-- Portfolio Projects -->
+        {projects.length > 0 && (
+          <section class="sitemap-section">
+            <h2 class="sitemap-section-title">Portfolio Projects</h2>
+            <ul class="sitemap-list">
+              {projects.map((project) => (
+                <li class="sitemap-item">
+                  <a href={`/portfolio/${project.slug}`} class="sitemap-link">{project.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <!-- Resources -->
+        <section class="sitemap-section">
+          <h2 class="sitemap-section-title">Resources</h2>
+          <ul class="sitemap-list">
+            <li class="sitemap-item"><a href="/llms.txt" class="sitemap-link">LLMS.txt (AI-readable content)</a></li>
+            <li class="sitemap-item"><a href="/rss.xml" class="sitemap-link">RSS Feed</a></li>
+          </ul>
+        </section>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

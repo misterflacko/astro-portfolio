@@ -7,11 +7,9 @@ import HeroSection from '../components/sections/HeroSection.astro';
 import ServiceCards from '../components/sections/ServiceCards.astro';
 import NewsGrid from '../components/sections/NewsGrid.astro';
 import SkillsSection from '../components/sections/SkillsSection.astro';
+import ProcessSection from '../components/sections/ProcessSection.astro';
+import SEOServicesGrid from '../components/sections/SEOServicesGrid.astro';
 import { skills } from '../data/skills';
-import WorkExperience from '../components/sections/WorkExperience.astro';
-import { work } from '../data/work';
-import Studies from '../components/sections/Studies.astro';
-import { studies } from '../data/studies';
 import { getCollection } from 'astro:content';
 
 // Get latest blog posts
@@ -49,9 +47,9 @@ const services = skills.slice(0, 6).map(skill => ({
 		<main class="full-width">
       <!-- Hero Section -->
       <HeroSection
-        title="Digital Marketing"
-        titleHighlight="That Drives Results"
-        subtitle="I help businesses grow through strategic SEO, compelling content, and data-driven marketing insights."
+        title="SEO for the"
+        titleHighlight="AI-Powered Search Era"
+        subtitle="Traditional SEO meets Generative Engine Optimization (GEO). I help brands stay visible across Google, ChatGPT, Perplexity, and every AI-powered search surface."
         showCTA
         primaryCTA={{ text: 'View Portfolio', href: '/portfolio' }}
         secondaryCTA={{ text: 'Read Blog', href: '/blog' }}
@@ -66,20 +64,30 @@ const services = skills.slice(0, 6).map(skill => ({
       <section class="content-section">
         <div class="content-container">
           <ServiceCards
-            title="Services That Accelerate Growth"
-            subtitle="Comprehensive digital marketing solutions tailored to your business goals."
+            title="Future-Proof Your Search Visibility"
+            subtitle="From traditional SEO to AI-powered discovery, comprehensive strategies for the evolving search landscape."
             services={services}
+          />
+        </div>
+      </section>
+
+      <!-- SEO/GEO Services Grid -->
+      <section class="content-section content-section--alt">
+        <div class="content-container">
+          <SEOServicesGrid
+            title="Search Optimization in the AI Era"
+            subtitle="From traditional SEO to Generative Engine Optimization (GEO), I help brands stay visible across every search surface—whether it's Google, ChatGPT, Perplexity, or the next AI breakthrough."
           />
         </div>
       </section>
 
       <!-- Latest Insights / Blog Section -->
       {recentPosts.length > 0 && (
-        <section class="content-section content-section--alt">
+        <section class="content-section">
           <div class="content-container">
             <NewsGrid
               title="Latest Insights"
-              subtitle="Digital marketing strategies, SEO tips, and industry insights."
+              subtitle="SEO, GEO, and the evolving search landscape—strategies for staying visible in the AI era."
               posts={recentPosts}
             />
           </div>
@@ -87,25 +95,22 @@ const services = skills.slice(0, 6).map(skill => ({
       )}
 
       <!-- Skills & Tools Section -->
-      <section class="content-section">
+      <section class="content-section content-section--alt">
         <div class="content-container">
           <SkillsSection title="Skills & Tools" skills={skills} />
         </div>
       </section>
 
-      <!-- Work Experience Section -->
-      <section class="content-section content-section--alt">
+      <!-- Process Section -->
+      <section class="content-section">
         <div class="content-container">
-          <WorkExperience title="Work Experience" items={work} />
+          <ProcessSection
+            title="How I Work"
+            subtitle="A proven approach combining traditional SEO expertise with modern AI-powered search strategies."
+          />
         </div>
       </section>
 
-      <!-- Studies Section -->
-      <section class="content-section">
-        <div class="content-container">
-          <Studies title="Education" items={studies} />
-        </div>
-      </section>
 		</main>
 		<Footer />
 	</body>
