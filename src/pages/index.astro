@@ -9,6 +9,7 @@ import NewsGrid from '../components/sections/NewsGrid.astro';
 import SkillsSection from '../components/sections/SkillsSection.astro';
 import ProcessSection from '../components/sections/ProcessSection.astro';
 import SEOServicesGrid from '../components/sections/SEOServicesGrid.astro';
+import SEOServicesGridV2 from '../components/sections/SEOServicesGridV2.astro';
 import { skills } from '../data/skills';
 import { getCollection } from 'astro:content';
 
@@ -71,15 +72,11 @@ const services = skills.slice(0, 6).map(skill => ({
         </div>
       </section>
 
-      <!-- SEO/GEO Services Grid -->
-      <section class="content-section content-section--alt">
-        <div class="content-container">
-          <SEOServicesGrid
-            title="Search Optimization in the AI Era"
-            subtitle="From traditional SEO to Generative Engine Optimization (GEO), I help brands stay visible across every search surface—whether it's Google, ChatGPT, Perplexity, or the next AI breakthrough."
-          />
-        </div>
-      </section>
+      <!-- SEO/GEO Services Grid V2 - Graphite Inspired -->
+      <SEOServicesGridV2
+        title="Search Optimization in the AI Era"
+        subtitle="From traditional SEO to Generative Engine Optimization (GEO), I help brands stay visible across every search surface—whether it's Google, ChatGPT, Perplexity, or the next AI breakthrough."
+      />
 
       <!-- Latest Insights / Blog Section -->
       {recentPosts.length > 0 && (

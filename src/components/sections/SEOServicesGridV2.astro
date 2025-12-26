@@ -1,0 +1,453 @@
+---
+/**
+ * SEOServicesGridV2 - Graphite-inspired SEO Services Grid
+ *
+ * Features:
+ * - Theme-aware gradient background section (dark/light mode)
+ * - Individual service item cards (not bullet lists)
+ * - Left teal accent border on each card
+ * - 5-column responsive layout with variable item counts
+ * - Card hover effects with lift and glow
+ * - Staggered fade-up entrance animations
+ */
+
+interface ServiceColumn {
+  title: string;
+  items: string[];
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+
+const services: ServiceColumn[] = [
+  {
+    title: "Editorial",
+    items: [
+      "Topical Authority",
+      "Persona Mapping & Strategy",
+      "User Intent Research",
+      "Market Gap Analysis",
+      "High-Intent Topics",
+      "High-Impact Briefs",
+      "Premium Copywriting"
+    ]
+  },
+  {
+    title: "Programmatic",
+    items: [
+      "Scalable Page Templates",
+      "High-Volume Page Generation",
+      "Indexation Logic",
+      "Unique & Quality Content",
+      "Title Tag Optimization"
+    ]
+  },
+  {
+    title: "AEO",
+    items: [
+      "Question Research",
+      "Earned & Owned Strategy",
+      "Citation Optimization",
+      "Brand Reputation"
+    ]
+  },
+  {
+    title: "Technical",
+    items: [
+      "Visibility Audits",
+      "Internal Linking",
+      "Architecture & Crawlability",
+      "International SEO",
+      "Site Migrations & Revamps"
+    ]
+  },
+  {
+    title: "Performance",
+    items: [
+      "Growth Forecasting",
+      "Custom Reporting Dashboard",
+      "KPI Tracking & Reporting",
+      "Cohort Analysis",
+      "CRO Audits & Optimization"
+    ]
+  }
+];
+
+// Calculate cumulative item index for staggered animations
+let cumulativeIndex = 0;
+const getAnimationDelay = (colIndex: number, itemIndex: number) => {
+  // For first column, just use itemIndex
+  if (colIndex === 0) return itemIndex * 50;
+  
+  // Calculate cumulative items from previous columns
+  let prevItems = 0;
+  for (let i = 0; i < colIndex; i++) {
+    prevItems += services[i].items.length;
+  }
+  return (prevItems + itemIndex) * 50;
+};
+---
+
+<section class="seo-grid-v2" aria-labelledby="seo-grid-title">
+  <div class="seo-grid-v2__container">
+    <!-- Section Header -->
+    {(title || subtitle) && (
+      <header class="seo-grid-v2__header">
+        {title && <h2 id="seo-grid-title" class="seo-grid-v2__title">{title}</h2>}
+        {subtitle && <p class="seo-grid-v2__subtitle">{subtitle}</p>}
+      </header>
+    )}
+
+    <!-- Column Headers Row -->
+    <div class="seo-grid-v2__headers" role="list" aria-label="Service categories">
+      {services.map((service) => (
+        <div class="seo-grid-v2__column-header" role="listitem">
+          {service.title}
+        </div>
+      ))}
+    </div>
+
+    <!-- Service Items Grid -->
+    <div class="seo-grid-v2__grid">
+      {services.map((service, colIndex) => (
+        <div class="seo-grid-v2__column" data-column={colIndex}>
+          {service.items.map((item, itemIndex) => (
+            <div
+              class="seo-grid-v2__item"
+              style={`--animation-delay: ${getAnimationDelay(colIndex, itemIndex)}ms`}
+            >
+              <span class="seo-grid-v2__item-text">{item}</span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ═══════════════════════════════════════════════════════════════
+     SECTION WRAPPER - Theme-Aware Gradient Background
+     ═══════════════════════════════════════════════════════════════ */
+  .seo-grid-v2 {
+    /* Dark mode defaults (using site's CSS variables where applicable) */
+    --grid-bg-start: #0a0d12;
+    --grid-bg-end: #12171f;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-bg-hover: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(255, 255, 255, 0.06);
+    --card-border-hover: rgba(255, 255, 255, 0.12);
+    --accent-color: var(--accent, #12EACB);
+    --accent-glow: rgba(18, 234, 203, 0.25);
+    --text-heading: var(--foreground, #ffffff);
+    --text-body: rgba(255, 255, 255, 0.85);
+    --text-muted: rgba(255, 255, 255, 0.6);
+
+    width: 100%;
+    background: linear-gradient(180deg, var(--grid-bg-start) 0%, var(--grid-bg-end) 100%);
+    padding: clamp(3rem, 6vw, 5rem) 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     LIGHT MODE THEME OVERRIDES
+     ═══════════════════════════════════════════════════════════════ */
+  :global([data-theme="light"]) .seo-grid-v2 {
+    --grid-bg-start: #f8fafc;
+    --grid-bg-end: #f1f5f9;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-bg-hover: rgba(255, 255, 255, 1);
+    --card-border: rgba(0, 0, 0, 0.08);
+    --card-border-hover: rgba(0, 0, 0, 0.12);
+    --accent-color: #0d9488;
+    --accent-glow: rgba(13, 148, 136, 0.15);
+    --text-heading: #1e293b;
+    --text-body: #334155;
+    --text-muted: #64748b;
+  }
+
+  :global([data-theme="light"]) .seo-grid-v2::before {
+    opacity: 0.02;
+  }
+
+  :global([data-theme="light"]) .seo-grid-v2__item {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  :global([data-theme="light"]) .seo-grid-v2__item:hover {
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      0 0 16px var(--accent-glow);
+  }
+
+  /* Subtle noise texture overlay */
+  .seo-grid-v2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+  }
+
+  .seo-grid-v2__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SECTION HEADER
+     ═══════════════════════════════════════════════════════════════ */
+  .seo-grid-v2__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .seo-grid-v2__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--text-heading);
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .seo-grid-v2__subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 700px;
+    margin-inline: auto;
+    line-height: 1.6;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     COLUMN HEADERS ROW
+     ═══════════════════════════════════════════════════════════════ */
+  .seo-grid-v2__headers {
+    display: none;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 1200px) {
+    .seo-grid-v2__headers {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+
+  .seo-grid-v2__column-header {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-left: 0.75rem;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SERVICE ITEMS GRID
+     ═══════════════════════════════════════════════════════════════ */
+  .seo-grid-v2__grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  /* Small mobile - Full width single column */
+  @media (min-width: 640px) {
+    .seo-grid-v2__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Tablet - 3 columns */
+  @media (min-width: 768px) {
+    .seo-grid-v2__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Desktop - 5 columns */
+  @media (min-width: 1200px) {
+    .seo-grid-v2__grid {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     COLUMN CONTAINER
+     ═══════════════════════════════════════════════════════════════ */
+  .seo-grid-v2__column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* Mobile column headers (shown inline) */
+  .seo-grid-v2__column::before {
+    content: attr(data-column-title);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  /* Map column index to title via CSS */
+  .seo-grid-v2__column[data-column="0"]::before { content: "Editorial"; }
+  .seo-grid-v2__column[data-column="1"]::before { content: "Programmatic"; }
+  .seo-grid-v2__column[data-column="2"]::before { content: "AEO"; }
+  .seo-grid-v2__column[data-column="3"]::before { content: "Technical"; }
+  .seo-grid-v2__column[data-column="4"]::before { content: "Performance"; }
+
+  /* Hide mobile headers on desktop (we show them in separate row) */
+  @media (min-width: 1200px) {
+    .seo-grid-v2__column::before {
+      display: none;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SERVICE ITEM CARD - Graphite Inspired
+     ═══════════════════════════════════════════════════════════════ */
+  .seo-grid-v2__item {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-left: 3px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    cursor: default;
+
+    /* Animation setup */
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.4s ease-out forwards;
+    animation-delay: var(--animation-delay, 0ms);
+
+    /* Transition for hover */
+    transition:
+      transform 0.2s ease-out,
+      background-color 0.2s ease-out,
+      border-color 0.2s ease-out,
+      box-shadow 0.2s ease-out;
+  }
+
+  /* Hover state */
+  .seo-grid-v2__item:hover {
+    transform: translateY(-2px);
+    background: var(--card-bg-hover);
+    border-color: var(--card-border-hover);
+    border-left-color: var(--accent-color);
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      0 0 20px var(--accent-glow);
+  }
+
+  /* Focus state for accessibility */
+  .seo-grid-v2__item:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+
+  .seo-grid-v2__item-text {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text-body);
+    line-height: 1.4;
+    display: block;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     ANIMATIONS
+     ═══════════════════════════════════════════════════════════════ */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .seo-grid-v2__item {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .seo-grid-v2__item:hover {
+      transform: none;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RESPONSIVE ADJUSTMENTS
+     ═══════════════════════════════════════════════════════════════ */
+  @media (max-width: 639px) {
+    .seo-grid-v2 {
+      padding: 2.5rem 1rem;
+    }
+
+    .seo-grid-v2__header {
+      margin-bottom: 2rem;
+    }
+
+    .seo-grid-v2__column {
+      /* Add visual separation between columns on mobile */
+      padding-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .seo-grid-v2__column:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .seo-grid-v2__item {
+      padding: 1rem 1.25rem;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .seo-grid-v2__grid {
+      gap: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .seo-grid-v2 {
+      padding: clamp(4rem, 7vw, 6rem) 2.5rem;
+    }
+
+    .seo-grid-v2__header {
+      margin-bottom: 3.5rem;
+    }
+
+    .seo-grid-v2__item {
+      padding: 0.75rem 0.875rem;
+    }
+
+    .seo-grid-v2__item-text {
+      font-size: 0.8125rem;
+    }
+  }
+</style>
