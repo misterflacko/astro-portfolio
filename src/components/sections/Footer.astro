@@ -29,7 +29,7 @@ const inoreaderUrl = `https://www.inoreader.com/?add_feed=${feedUrl}`;
 
   <!-- Footer Main -->
   <div class="border-t border-border px-6 py-12">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-10 sm:gap-8">
+    <div class="max-w-6xl mx-auto footer-grid">
       <!-- Brand -->
       <div class="flex flex-col gap-3">
         <a href="/" class="inline-flex items-center gap-3 text-foreground text-lg font-medium no-underline group">
@@ -41,8 +41,8 @@ const inoreaderUrl = `https://www.inoreader.com/?add_feed=${feedUrl}`;
         <p class="text-sm text-muted-foreground m-0">SEO & GEO Specialist</p>
       </div>
 
-      <!-- Navigation -->
-      <nav class="flex gap-8 sm:contents" aria-label="Footer navigation">
+      <!-- Navigation & Social - All 3 columns in same row on mobile -->
+      <nav class="footer-nav-columns" aria-label="Footer navigation">
         <div class="flex flex-col gap-3">
           <h3 class="text-xs font-semibold uppercase tracking-widest text-muted-foreground m-0">Pages</h3>
           <ul class="list-none m-0 p-0 flex flex-col gap-2">
@@ -62,32 +62,32 @@ const inoreaderUrl = `https://www.inoreader.com/?add_feed=${feedUrl}`;
             <li><a href={feedlyUrl} target="_blank" rel="noopener noreferrer" class="text-[15px] text-foreground/80 no-underline hover:text-primary transition-colors">RSS Feed</a></li>
           </ul>
         </div>
-      </nav>
 
-      <!-- Social -->
-      <div class="flex flex-col gap-3">
-        <h3 class="text-xs font-semibold uppercase tracking-widest text-muted-foreground m-0">Connect</h3>
-        <div class="flex gap-3">
-          <a
-            href="https://linkedin.com/in/austincrockett"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            class="flex items-center justify-center w-10 h-10 rounded-full bg-muted text-foreground/80 hover:bg-primary hover:text-primary-foreground hover:-translate-y-0.5 transition-all"
-          >
-            <Linkedin className="h-5 w-5" />
-          </a>
-          <a
-            href="https://github.com/misterflacko"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            class="flex items-center justify-center w-10 h-10 rounded-full bg-muted text-foreground/80 hover:bg-primary hover:text-primary-foreground hover:-translate-y-0.5 transition-all"
-          >
-            <Github className="h-5 w-5" />
-          </a>
+        <!-- Social -->
+        <div class="flex flex-col gap-3">
+          <h3 class="text-xs font-semibold uppercase tracking-widest text-muted-foreground m-0">Connect</h3>
+          <div class="flex gap-3">
+            <a
+              href="https://linkedin.com/in/austincrockett"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              class="flex items-center justify-center w-10 h-10 rounded-full bg-muted text-foreground/80 hover:bg-primary hover:text-primary-foreground hover:-translate-y-0.5 transition-all"
+            >
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a
+              href="https://github.com/misterflacko"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              class="flex items-center justify-center w-10 h-10 rounded-full bg-muted text-foreground/80 hover:bg-primary hover:text-primary-foreground hover:-translate-y-0.5 transition-all"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+          </div>
         </div>
-      </div>
+      </nav>
     </div>
 
     <!-- Copyright -->
@@ -113,6 +113,48 @@ const inoreaderUrl = `https://www.inoreader.com/?add_feed=${feedUrl}`;
 
   :global(.dark) .footer-cta {
     background: linear-gradient(to bottom, hsl(222 47% 4%), hsl(222 47% 6%));
+  }
+
+  /* Footer grid - Brand above, nav columns below on mobile */
+  .footer-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* Navigation columns - always 3 columns in a row */
+  .footer-nav-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Tablet and up - 4 column layout with brand */
+  @media (min-width: 768px) {
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .footer-nav-columns {
+      display: contents;
+    }
+  }
+
+  /* Compact text on very small screens */
+  @media (max-width: 479px) {
+    .footer-nav-columns {
+      gap: 1rem;
+    }
+
+    .footer-nav-columns h3 {
+      font-size: 0.625rem;
+    }
+
+    .footer-nav-columns a {
+      font-size: 0.8125rem;
+    }
   }
 </style>
 
