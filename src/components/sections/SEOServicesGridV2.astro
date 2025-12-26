@@ -102,29 +102,32 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
       </header>
     )}
 
-    <!-- Column Headers Row -->
-    <div class="seo-grid-v2__headers" role="list" aria-label="Service categories">
-      {services.map((service) => (
-        <div class="seo-grid-v2__column-header" role="listitem">
-          {service.title}
-        </div>
-      ))}
-    </div>
+    <!-- Horizontal Scroll Wrapper -->
+    <div class="seo-grid-v2__scroll-wrapper">
+      <!-- Column Headers Row -->
+      <div class="seo-grid-v2__headers" role="list" aria-label="Service categories">
+        {services.map((service) => (
+          <div class="seo-grid-v2__column-header" role="listitem">
+            {service.title}
+          </div>
+        ))}
+      </div>
 
-    <!-- Service Items Grid -->
-    <div class="seo-grid-v2__grid">
-      {services.map((service, colIndex) => (
-        <div class="seo-grid-v2__column" data-column={colIndex}>
-          {service.items.map((item, itemIndex) => (
-            <div
-              class="seo-grid-v2__item"
-              style={`--animation-delay: ${getAnimationDelay(colIndex, itemIndex)}ms`}
-            >
-              <span class="seo-grid-v2__item-text">{item}</span>
-            </div>
-          ))}
-        </div>
-      ))}
+      <!-- Service Items Grid -->
+      <div class="seo-grid-v2__grid">
+        {services.map((service, colIndex) => (
+          <div class="seo-grid-v2__column" data-column={colIndex}>
+            {service.items.map((item, itemIndex) => (
+              <div
+                class="seo-grid-v2__item"
+                style={`--animation-delay: ${getAnimationDelay(colIndex, itemIndex)}ms`}
+              >
+                <span class="seo-grid-v2__item-text">{item}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -203,6 +206,35 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
   }
 
   /* ═══════════════════════════════════════════════════════════════
+     HORIZONTAL SCROLL WRAPPER - Enables side-scrolling on mobile
+     ═══════════════════════════════════════════════════════════════ */
+  .seo-grid-v2__scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) transparent;
+    padding-bottom: 0.5rem;
+  }
+
+  .seo-grid-v2__scroll-wrapper::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .seo-grid-v2__scroll-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .seo-grid-v2__scroll-wrapper::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 3px;
+  }
+
+  .seo-grid-v2__scroll-wrapper::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-glow);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
      SECTION HEADER
      ═══════════════════════════════════════════════════════════════ */
   .seo-grid-v2__header {
@@ -229,19 +261,15 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
   }
 
   /* ═══════════════════════════════════════════════════════════════
-     COLUMN HEADERS ROW
+     COLUMN HEADERS ROW - Always visible, matches grid columns
      ═══════════════════════════════════════════════════════════════ */
   .seo-grid-v2__headers {
-    display: none;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  @media (min-width: 1200px) {
-    .seo-grid-v2__headers {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-    }
+    display: grid;
+    grid-template-columns: repeat(5, minmax(120px, 1fr));
+    gap: clamp(0.5rem, 1.5vw, 1rem);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--card-border);
   }
 
   .seo-grid-v2__column-header {
@@ -254,46 +282,14 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
   }
 
   /* ═══════════════════════════════════════════════════════════════
-     SERVICE ITEMS GRID
+     SERVICE ITEMS GRID - Always 5 columns, horizontal scroll on mobile
      ═══════════════════════════════════════════════════════════════ */
   .seo-grid-v2__grid {
     display: grid;
-    /* Responsive gap that scales with viewport */
+    /* Always 5 columns with minimum width for readability */
+    grid-template-columns: repeat(5, minmax(120px, 1fr));
     gap: clamp(0.5rem, 1.5vw, 1rem);
-    grid-template-columns: 1fr;
     align-items: start;
-  }
-
-  /* Small mobile - 2 columns with tighter spacing */
-  @media (min-width: 480px) {
-    .seo-grid-v2__grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: clamp(0.5rem, 1.5vw, 0.75rem);
-    }
-  }
-
-  /* Larger mobile / small tablet - 3 columns */
-  @media (min-width: 640px) {
-    .seo-grid-v2__grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(0.5rem, 1.5vw, 0.875rem);
-    }
-  }
-
-  /* Tablet - 4 columns for better intermediate sizing */
-  @media (min-width: 900px) {
-    .seo-grid-v2__grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: clamp(0.625rem, 1.5vw, 1rem);
-    }
-  }
-
-  /* Desktop - 5 columns */
-  @media (min-width: 1200px) {
-    .seo-grid-v2__grid {
-      grid-template-columns: repeat(5, 1fr);
-      gap: 1rem;
-    }
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -304,35 +300,8 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
     flex-direction: column;
     /* Responsive gap between items within a column */
     gap: clamp(0.375rem, 1vw, 0.75rem);
-    /* Ensure column can shrink */
-    min-width: 0;
-  }
-
-  /* Mobile column headers (shown inline) */
-  .seo-grid-v2__column::before {
-    content: attr(data-column-title);
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--accent-color);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.25rem;
-    border-bottom: 1px solid var(--card-border);
-  }
-
-  /* Map column index to title via CSS */
-  .seo-grid-v2__column[data-column="0"]::before { content: "Editorial"; }
-  .seo-grid-v2__column[data-column="1"]::before { content: "Programmatic"; }
-  .seo-grid-v2__column[data-column="2"]::before { content: "AEO"; }
-  .seo-grid-v2__column[data-column="3"]::before { content: "Technical"; }
-  .seo-grid-v2__column[data-column="4"]::before { content: "Performance"; }
-
-  /* Hide mobile headers on desktop (we show them in separate row) */
-  @media (min-width: 1200px) {
-    .seo-grid-v2__column::before {
-      display: none;
-    }
+    /* Minimum width to maintain readability */
+    min-width: 120px;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -421,11 +390,11 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
   }
 
   /* ═══════════════════════════════════════════════════════════════
-     RESPONSIVE ADJUSTMENTS
+     RESPONSIVE ADJUSTMENTS - Simplified for horizontal scroll layout
      ═══════════════════════════════════════════════════════════════ */
 
-  /* Very small mobile - single column, more compact */
-  @media (max-width: 479px) {
+  /* Mobile - compact padding, all 5 columns visible with scroll */
+  @media (max-width: 767px) {
     .seo-grid-v2 {
       padding: 2rem 0.75rem;
     }
@@ -434,15 +403,24 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
       margin-bottom: 1.5rem;
     }
 
-    .seo-grid-v2__column {
-      /* Add visual separation between columns on mobile */
-      padding-bottom: 1rem;
-      margin-bottom: 0.5rem;
+    .seo-grid-v2__column-header {
+      font-size: 0.625rem;
+      padding-left: 0.5rem;
     }
 
-    .seo-grid-v2__column:last-child {
-      padding-bottom: 0;
-      margin-bottom: 0;
+    .seo-grid-v2__item {
+      padding: 0.5rem 0.625rem;
+    }
+
+    .seo-grid-v2__item-text {
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .seo-grid-v2 {
+      padding: 3rem 1.5rem;
     }
 
     .seo-grid-v2__item {
@@ -454,68 +432,7 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
     }
   }
 
-  /* Small mobile 2-column */
-  @media (min-width: 480px) and (max-width: 639px) {
-    .seo-grid-v2 {
-      padding: 2.5rem 1rem;
-    }
-
-    .seo-grid-v2__header {
-      margin-bottom: 1.75rem;
-    }
-
-    .seo-grid-v2__item {
-      padding: 0.5rem 0.625rem;
-    }
-
-    .seo-grid-v2__item-text {
-      font-size: 0.75rem;
-    }
-
-    .seo-grid-v2__column::before {
-      font-size: 0.625rem;
-    }
-  }
-
-  /* 3-column tablet - compact cards */
-  @media (min-width: 640px) and (max-width: 899px) {
-    .seo-grid-v2 {
-      padding: 2.5rem 1rem;
-    }
-
-    .seo-grid-v2__item {
-      padding: 0.5rem 0.625rem;
-    }
-
-    .seo-grid-v2__item-text {
-      font-size: 0.6875rem;
-    }
-
-    .seo-grid-v2__column::before {
-      font-size: 0.625rem;
-    }
-  }
-
-  /* 4-column intermediate - balanced sizing */
-  @media (min-width: 900px) and (max-width: 1199px) {
-    .seo-grid-v2 {
-      padding: 3rem 1.5rem;
-    }
-
-    .seo-grid-v2__item {
-      padding: 0.5rem 0.625rem;
-    }
-
-    .seo-grid-v2__item-text {
-      font-size: 0.6875rem;
-    }
-
-    .seo-grid-v2__column::before {
-      font-size: 0.625rem;
-    }
-  }
-
-  /* Desktop 5-column - full sizing */
+  /* Desktop - full sizing, no scroll needed */
   @media (min-width: 1200px) {
     .seo-grid-v2 {
       padding: clamp(4rem, 7vw, 6rem) 2.5rem;
@@ -531,6 +448,11 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
 
     .seo-grid-v2__item-text {
       font-size: 0.8125rem;
+    }
+
+    /* Hide scrollbar on desktop when content fits */
+    .seo-grid-v2__scroll-wrapper {
+      overflow-x: visible;
     }
   }
 
