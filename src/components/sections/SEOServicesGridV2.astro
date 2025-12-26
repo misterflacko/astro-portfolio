@@ -258,22 +258,33 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
      ═══════════════════════════════════════════════════════════════ */
   .seo-grid-v2__grid {
     display: grid;
-    gap: 1rem;
+    /* Responsive gap that scales with viewport */
+    gap: clamp(0.5rem, 1.5vw, 1rem);
     grid-template-columns: 1fr;
     align-items: start;
   }
 
-  /* Small mobile - Full width single column */
-  @media (min-width: 640px) {
+  /* Small mobile - 2 columns with tighter spacing */
+  @media (min-width: 480px) {
     .seo-grid-v2__grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: clamp(0.5rem, 1.5vw, 0.75rem);
     }
   }
 
-  /* Tablet - 3 columns */
-  @media (min-width: 768px) {
+  /* Larger mobile / small tablet - 3 columns */
+  @media (min-width: 640px) {
     .seo-grid-v2__grid {
       grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.5rem, 1.5vw, 0.875rem);
+    }
+  }
+
+  /* Tablet - 4 columns for better intermediate sizing */
+  @media (min-width: 900px) {
+    .seo-grid-v2__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(0.625rem, 1.5vw, 1rem);
     }
   }
 
@@ -291,7 +302,10 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
   .seo-grid-v2__column {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    /* Responsive gap between items within a column */
+    gap: clamp(0.375rem, 1vw, 0.75rem);
+    /* Ensure column can shrink */
+    min-width: 0;
   }
 
   /* Mobile column headers (shown inline) */
@@ -328,10 +342,16 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
     position: relative;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-left: 3px solid var(--accent-color);
-    border-radius: 8px;
-    padding: 0.875rem 1rem;
+    border-left: clamp(2px, 0.3vw, 3px) solid var(--accent-color);
+    border-radius: clamp(4px, 1vw, 8px);
+    /* Responsive padding that scales with viewport */
+    padding: clamp(0.5rem, 1.5vw, 0.875rem) clamp(0.5rem, 1.5vw, 1rem);
     cursor: default;
+    /* Allow text to wrap properly in narrow columns */
+    min-width: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 
     /* Animation setup */
     opacity: 0;
@@ -365,10 +385,11 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
   }
 
   .seo-grid-v2__item-text {
-    font-size: 0.875rem;
+    /* Responsive font size that scales with viewport */
+    font-size: clamp(0.6875rem, 1.5vw, 0.875rem);
     font-weight: 400;
     color: var(--text-body);
-    line-height: 1.4;
+    line-height: 1.35;
     display: block;
   }
 
@@ -402,18 +423,20 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
   /* ═══════════════════════════════════════════════════════════════
      RESPONSIVE ADJUSTMENTS
      ═══════════════════════════════════════════════════════════════ */
-  @media (max-width: 639px) {
+
+  /* Very small mobile - single column, more compact */
+  @media (max-width: 479px) {
     .seo-grid-v2 {
-      padding: 2.5rem 1rem;
+      padding: 2rem 0.75rem;
     }
 
     .seo-grid-v2__header {
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .seo-grid-v2__column {
       /* Add visual separation between columns on mobile */
-      padding-bottom: 1.5rem;
+      padding-bottom: 1rem;
       margin-bottom: 0.5rem;
     }
 
@@ -423,16 +446,76 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
     }
 
     .seo-grid-v2__item {
-      padding: 1rem 1.25rem;
+      padding: 0.625rem 0.75rem;
+    }
+
+    .seo-grid-v2__item-text {
+      font-size: 0.8125rem;
     }
   }
 
-  @media (min-width: 768px) and (max-width: 1199px) {
-    .seo-grid-v2__grid {
-      gap: 1.25rem;
+  /* Small mobile 2-column */
+  @media (min-width: 480px) and (max-width: 639px) {
+    .seo-grid-v2 {
+      padding: 2.5rem 1rem;
+    }
+
+    .seo-grid-v2__header {
+      margin-bottom: 1.75rem;
+    }
+
+    .seo-grid-v2__item {
+      padding: 0.5rem 0.625rem;
+    }
+
+    .seo-grid-v2__item-text {
+      font-size: 0.75rem;
+    }
+
+    .seo-grid-v2__column::before {
+      font-size: 0.625rem;
     }
   }
 
+  /* 3-column tablet - compact cards */
+  @media (min-width: 640px) and (max-width: 899px) {
+    .seo-grid-v2 {
+      padding: 2.5rem 1rem;
+    }
+
+    .seo-grid-v2__item {
+      padding: 0.5rem 0.625rem;
+    }
+
+    .seo-grid-v2__item-text {
+      font-size: 0.6875rem;
+    }
+
+    .seo-grid-v2__column::before {
+      font-size: 0.625rem;
+    }
+  }
+
+  /* 4-column intermediate - balanced sizing */
+  @media (min-width: 900px) and (max-width: 1199px) {
+    .seo-grid-v2 {
+      padding: 3rem 1.5rem;
+    }
+
+    .seo-grid-v2__item {
+      padding: 0.5rem 0.625rem;
+    }
+
+    .seo-grid-v2__item-text {
+      font-size: 0.6875rem;
+    }
+
+    .seo-grid-v2__column::before {
+      font-size: 0.625rem;
+    }
+  }
+
+  /* Desktop 5-column - full sizing */
   @media (min-width: 1200px) {
     .seo-grid-v2 {
       padding: clamp(4rem, 7vw, 6rem) 2.5rem;
@@ -448,6 +531,17 @@ const getAnimationDelay = (colIndex: number, itemIndex: number) => {
 
     .seo-grid-v2__item-text {
       font-size: 0.8125rem;
+    }
+  }
+
+  /* Large desktop - generous sizing */
+  @media (min-width: 1400px) {
+    .seo-grid-v2__item {
+      padding: 0.875rem 1rem;
+    }
+
+    .seo-grid-v2__item-text {
+      font-size: 0.875rem;
     }
   }
 </style>
