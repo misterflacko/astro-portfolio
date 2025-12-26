@@ -5,8 +5,6 @@ import Header from '../components/sections/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import HeroSection from '../components/sections/HeroSection.astro';
 import ServiceCards from '../components/sections/ServiceCards.astro';
-import NewsGrid from '../components/sections/NewsGrid.astro';
-import SkillsSection from '../components/sections/SkillsSection.astro';
 import ProcessSection from '../components/sections/ProcessSection.astro';
 import SEOServicesGrid from '../components/sections/SEOServicesGrid.astro';
 import SEOServicesGridV2 from '../components/sections/SEOServicesGridV2.astro';
@@ -17,7 +15,6 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const latestPost = posts[0];
-const recentPosts = posts.slice(0, 3);
 
 // Transform skills to services format
 const services = skills.slice(0, 6).map(skill => ({
@@ -77,26 +74,6 @@ const services = skills.slice(0, 6).map(skill => ({
         title="Search Optimization in the AI Era"
         subtitle="From traditional SEO to Generative Engine Optimization (GEO), I help brands stay visible across every search surface—whether it's Google, ChatGPT, Perplexity, or the next AI breakthrough."
       />
-
-      <!-- Latest Insights / Blog Section -->
-      {recentPosts.length > 0 && (
-        <section class="content-section">
-          <div class="content-container">
-            <NewsGrid
-              title="Latest Insights"
-              subtitle="SEO, GEO, and the evolving search landscape—strategies for staying visible in the AI era."
-              posts={recentPosts}
-            />
-          </div>
-        </section>
-      )}
-
-      <!-- Skills & Tools Section -->
-      <section class="content-section content-section--alt">
-        <div class="content-container">
-          <SkillsSection title="Skills & Tools" skills={skills} />
-        </div>
-      </section>
 
       <!-- Process Section -->
       <section class="content-section">
