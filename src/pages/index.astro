@@ -6,15 +6,8 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import HeroSection from '../components/sections/HeroSection.astro';
 import ServiceCards from '../components/sections/ServiceCards.astro';
 import ProcessSection from '../components/sections/ProcessSection.astro';
-import SEOServicesGrid from '../components/sections/SEOServicesGrid.astro';
 import SEOServicesGridV2 from '../components/sections/SEOServicesGridV2.astro';
 import { skills } from '../data/skills';
-import { getCollection } from 'astro:content';
-
-// Get latest blog posts
-const posts = (await getCollection('blog'))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const latestPost = posts[0];
 
 // Transform skills to services format
 const services = skills.slice(0, 6).map(skill => ({
@@ -51,11 +44,6 @@ const services = skills.slice(0, 6).map(skill => ({
         showCTA
         primaryCTA={{ text: 'View Portfolio', href: '/portfolio' }}
         secondaryCTA={{ text: 'Read Blog', href: '/blog' }}
-        featuredBanner={latestPost ? {
-          label: 'Latest Post',
-          title: latestPost.data.title,
-          href: `/blog/${latestPost.slug}`
-        } : undefined}
       />
 
       <!-- Services Section -->
