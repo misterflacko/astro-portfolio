@@ -34,14 +34,12 @@ export function MobileNav({ links, currentPath = "/" }: MobileNavProps) {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden rounded-full"
+        <button
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-[#12EACB] hover:bg-[#0FD4B8] transition-colors duration-200 shadow-md"
           aria-label="Open menu"
         >
-          <Menu className="h-5 w-5" />
-        </Button>
+          <Menu className="h-5 w-5 text-[#1D2B38]" />
+        </button>
       </SheetTrigger>
       <SheetContent side="right" className="w-[300px] sm:w-[350px]">
         <SheetHeader>
