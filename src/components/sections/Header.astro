@@ -70,15 +70,36 @@ function isActive(href: string): boolean {
 </header>
 
 <style>
-    /* Header - Initial state with generous top padding */
+    /* Header - Initial state with generous top padding (viewport-relative) */
     .site-header {
-        padding-top: 4rem;
+        /* Mobile: min 1.5rem, scales with viewport, max 3rem */
+        padding-top: clamp(1.5rem, 5vh, 3rem);
         transition: padding-top 0.3s ease;
     }
 
-    /* Header - Scrolled state with standard padding */
+    /* Header - Scrolled state with compact padding */
     .site-header.header-scrolled {
-        padding-top: 2rem;
+        padding-top: clamp(0.75rem, 2vh, 1.5rem);
+    }
+
+    /* Tablet and up - more generous spacing */
+    @media (min-width: 768px) {
+        .site-header {
+            padding-top: clamp(2rem, 5vh, 4rem);
+        }
+        .site-header.header-scrolled {
+            padding-top: clamp(1rem, 2.5vh, 2rem);
+        }
+    }
+
+    /* Desktop - full generous spacing */
+    @media (min-width: 1024px) {
+        .site-header {
+            padding-top: clamp(2.5rem, 6vh, 4rem);
+        }
+        .site-header.header-scrolled {
+            padding-top: clamp(1.25rem, 3vh, 2rem);
+        }
     }
 
     /* Full-width Header Container */

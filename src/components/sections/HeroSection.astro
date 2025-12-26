@@ -221,19 +221,21 @@ const isFullHeight = variant === 'full';
     }
   }
 
-  /* Content */
+  /* Content - using viewport-relative padding with clamp() */
   .hero__content {
     position: relative;
     z-index: 1;
     flex: 1;
     display: flex;
     align-items: center;
-    padding: 8rem 1.5rem 4rem;
+    /* Mobile-first: min 5rem, scales with vh, max 8rem */
+    padding: clamp(5rem, 12vh, 8rem) 1.5rem clamp(2rem, 5vh, 4rem);
   }
 
   .hero--full .hero__content {
-    padding-top: 10rem;
-    padding-bottom: 6rem;
+    /* Full height variant needs slightly more top padding for header clearance */
+    padding-top: clamp(5.5rem, 14vh, 10rem);
+    padding-bottom: clamp(3rem, 6vh, 6rem);
   }
 
   .hero__container {
@@ -320,14 +322,34 @@ const isFullHeight = variant === 'full';
     }
   }
 
-  @media (min-width: 1024px) {
+  /* Tablet - slightly more generous spacing */
+  @media (min-width: 768px) {
     .hero__content {
-      padding: 8rem 2rem;
+      padding: clamp(5rem, 12vh, 8rem) 2rem clamp(2.5rem, 5vh, 4rem);
     }
 
     .hero--full .hero__content {
-      padding-top: 12rem;
-      padding-bottom: 8rem;
+      padding-top: clamp(6rem, 15vh, 10rem);
+      padding-bottom: clamp(3rem, 6vh, 6rem);
+    }
+  }
+
+  /* Desktop - can afford more breathing room */
+  @media (min-width: 1024px) {
+    .hero__content {
+      padding: clamp(5.5rem, 14vh, 10rem) 2.5rem clamp(3rem, 6vh, 5rem);
+    }
+
+    .hero--full .hero__content {
+      padding-top: clamp(6.5rem, 16vh, 12rem);
+      padding-bottom: clamp(4rem, 8vh, 8rem);
+    }
+  }
+
+  /* Large desktop - generous spacing */
+  @media (min-width: 1440px) {
+    .hero--full .hero__content {
+      padding-top: clamp(7rem, 18vh, 14rem);
     }
   }
 </style>
