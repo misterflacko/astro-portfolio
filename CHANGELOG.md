@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2025-12-26
+
+### SEO Services Grid Enhancement & Homepage Cleanup
+
+**Live URL**: https://ac-seo-marketing-portfolio.netlify.app
+
+### Added
+
+- **SEOServicesGridV2 Light/Dark Mode Support**
+  - Theme-aware gradient backgrounds using CSS custom properties
+  - Light mode: White/off-white cards with subtle shadows
+  - Dark mode: Transparent cards with glow effects
+  - Uses `:global([data-theme="light"])` scoped selectors
+
+- **Tools & Platforms Slider on About Page**
+  - Reintroduced Carousel component under Expertise section
+  - Displays technology and platform logos (Supabase, Tailwind, WordPress, Astro, etc.)
+  - Responsive spacing with mt-12 md:mt-16
+
+### Changed
+
+- **SEOServicesGridV2 Content Update** (20 → 26 items)
+  - Editorial (7 items): Topical Authority, Persona Mapping & Strategy, User Intent Research, Market Gap Analysis, High-Intent Topics, High-Impact Briefs, Premium Copywriting
+  - Programmatic (5 items): Scalable Page Templates, High-Volume Page Generation, Indexation Logic, Unique & Quality Content, Title Tag Optimization
+  - AEO (4 items): Question Research, Earned & Owned Strategy, Citation Optimization, Brand Reputation
+  - Technical (5 items): Visibility Audits, Internal Linking, Architecture & Crawlability, International SEO, Site Migrations & Revamps
+  - Performance (5 items): Growth Forecasting, Custom Reporting Dashboard, KPI Tracking & Reporting, Cohort Analysis, CRO Audits & Optimization
+
+- **Animation Delay Calculation**
+  - Updated to support variable item counts per column
+  - Cumulative index calculation for smooth staggered wave effect
+
+- **Grid Layout**
+  - Added `align-items: start` for natural variable column heights
+
+### Removed
+
+- **Homepage Latest Insights Section** (NewsGrid component)
+  - Removed to reduce distraction from core content
+
+- **Homepage Skills & Tools Section** (SkillsSection component)
+  - Removed duplicate of ServiceCards already shown in first section
+  - Cleaned up unused imports (NewsGrid, SkillsSection, recentPosts)
+
+### Commits
+
+- `add07e8` - SEOServicesGridV2 content update + theme support
+- `c191be8` - Remove Latest Insights and Skills sections from homepage
+- `8855ae4` - Add Tools & Platforms slider to About page
+
+---
+
 ## [2.0.0] - 2025-12-24
 
 ### shadcn/ui Migration & Visual Enhancement
