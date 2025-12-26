@@ -142,18 +142,34 @@ const inoreaderUrl = `https://www.inoreader.com/?add_feed=${feedUrl}`;
     }
   }
 
-  /* Compact text on very small screens */
-  @media (max-width: 479px) {
+  /* Compact text on mobile */
+  @media (max-width: 767px) {
     .footer-nav-columns {
       gap: 1rem;
     }
 
     .footer-nav-columns h3 {
-      font-size: 0.625rem;
+      font-size: 0.5625rem;
+      letter-spacing: 0.08em;
     }
 
     .footer-nav-columns a {
-      font-size: 0.8125rem;
+      font-size: 0.75rem;
+    }
+
+    .footer-nav-columns ul {
+      gap: 0.25rem;
+    }
+  }
+
+  /* Even more compact on very small screens */
+  @media (max-width: 400px) {
+    .footer-nav-columns h3 {
+      font-size: 0.5rem;
+    }
+
+    .footer-nav-columns a {
+      font-size: 0.6875rem;
     }
   }
 </style>
