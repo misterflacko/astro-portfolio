@@ -4,7 +4,9 @@ import Footer from '../components/sections/Footer.astro';
 import Header from '../components/sections/Header.astro';
 import HeroSection from '../components/sections/HeroSection.astro';
 import ServiceCards from '../components/sections/ServiceCards.astro';
+import Carousel from '../components/ui/carousel/Carousel.astro';
 import { skills } from '../data/skills';
+import { logos } from '../data/logos';
 
 const pageTitle = 'About Me';
 const pageDescription = 'Learn more about Austin Crockett - a digital marketing expert specializing in SEO, content strategy, and data-driven growth.';
@@ -104,6 +106,12 @@ const coreValues = [
             subtitle="Comprehensive digital marketing capabilities."
             services={skills.map(s => ({ ...s, href: undefined }))}
           />
+
+          <!-- Tools Slider -->
+          <div class="mt-12 md:mt-16">
+            <h3 class="text-xl md:text-2xl font-semibold text-center mb-8 text-foreground">Tools & Platforms</h3>
+            <Carousel tools={logos} />
+          </div>
         </div>
       </section>
     </main>
