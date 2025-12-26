@@ -58,7 +58,7 @@ function isActive(href: string): boolean {
         </div>
 
         <!-- Mobile: Theme Toggle + Hamburger -->
-        <div class="flex items-center gap-2 md:hidden pointer-events-auto">
+        <div class="mobile-nav-wrapper flex items-center gap-2 pointer-events-auto">
             <ThemeToggle client:load />
             <MobileNav
                 client:load
@@ -149,8 +149,9 @@ function isActive(href: string): boolean {
     }
 
     /* Navigation Pill - Frosted glass effect */
+    /* Hidden on mobile, visible on tablet+ (768px) */
     .nav-pill {
-        display: flex;
+        display: none; /* Hidden by default on mobile */
         align-items: center;
         gap: 0.5rem;
         padding: 0.375rem 0.375rem 0.375rem 1rem;
@@ -159,6 +160,24 @@ function isActive(href: string): boolean {
         box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
         backdrop-filter: blur(16px);
         border: 1px solid var(--border);
+    }
+
+    /* Show nav pill on tablet and up */
+    @media (min-width: 768px) {
+        .nav-pill {
+            display: flex;
+        }
+    }
+
+    /* Mobile nav wrapper - visible by default, hidden on tablet+ */
+    .mobile-nav-wrapper {
+        display: flex;
+    }
+
+    @media (min-width: 768px) {
+        .mobile-nav-wrapper {
+            display: none;
+        }
     }
 
     :global(.dark) .nav-pill {
