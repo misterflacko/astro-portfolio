@@ -22,7 +22,7 @@ function isActive(href: string): boolean {
 }
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4 pointer-events-none">
+<header class="site-header fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pointer-events-none">
     <div class="header-container">
         <!-- Logo Section - LEFT edge, outside pill -->
         <a class="logo-link pointer-events-auto" href="/" aria-label="Home">
@@ -70,6 +70,17 @@ function isActive(href: string): boolean {
 </header>
 
 <style>
+    /* Header - Initial state with more top padding */
+    .site-header {
+        padding-top: 2rem;
+        transition: padding-top 0.3s ease;
+    }
+
+    /* Header - Scrolled state with reduced padding */
+    .site-header.header-scrolled {
+        padding-top: 1rem;
+    }
+
     /* Full-width Header Container */
     .header-container {
         display: flex;
@@ -188,5 +199,27 @@ function isActive(href: string): boolean {
             root.classList.add('dark');
             root.dataset.theme = 'dark';
         }
+    })();
+
+    // Header scroll behavior - reduce padding on scroll
+    (function() {
+        const header = document.querySelector('.site-header');
+        if (!header) return;
+
+        const scrollThreshold = 50;
+
+        function updateHeader() {
+            if (window.scrollY > scrollThreshold) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        }
+
+        // Initial check
+        updateHeader();
+
+        // Listen for scroll
+        window.addEventListener('scroll', updateHeader, { passive: true });
     })();
 </script>
