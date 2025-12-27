@@ -77,39 +77,51 @@ const iconComponents = {
 <style>
   /* ═══════════════════════════════════════════════════════════════
      SECTION WRAPPER - Matches ServiceCards section styling exactly
-     Using same Tailwind values: bg-card/50, border-border/50, shadow-sm
+     Using exact computed values from ServiceCards component
      ═══════════════════════════════════════════════════════════════ */
   .ai-services {
-    --section-bg: hsl(var(--background));
-    /* bg-card/50 - 50% opacity card background */
-    --card-bg: hsl(var(--card) / 0.5);
-    --card-bg-hover: hsl(var(--card));
-    /* border-border/50 */
-    --card-border: hsl(var(--border) / 0.5);
-    --card-border-hover: hsl(var(--border));
-    /* Tailwind shadow-sm */
-    --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    /* Tailwind shadow-lg */
+    /* Light mode - exact values from ServiceCards */
+    /* Card bg: #FEFEFE (white at 50% opacity on white) → #FFFFFF on hover */
+    --card-bg: #FEFEFE;
+    --card-bg-hover: #FFFFFF;
+    /* Border: subtle gray with opacity */
+    --card-border: rgba(29, 43, 56, 0.05);
+    --card-border-hover: rgba(29, 43, 56, 0.1);
+    /* Tailwind shadow (not shadow-sm) - matches ServiceCards exactly */
+    --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    /* Tailwind shadow-lg for hover */
     --card-shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    /* bg-primary/10 */
-    --icon-bg: hsl(var(--primary) / 0.1);
-    --icon-color: hsl(var(--primary));
-    --text-heading: hsl(var(--foreground));
-    --text-body: hsl(var(--muted-foreground));
-    --text-link: hsl(var(--foreground));
-    --text-link-hover: hsl(var(--primary));
-    --bullet-color: hsl(var(--primary));
+    /* Icon bg: #E7FCF9 (teal at 10% opacity) */
+    --icon-bg: #E7FCF9;
+    --icon-color: #12EACB;
+    --text-heading: #0f172a;
+    --text-body: #64748b;
+    --text-link: #0f172a;
+    --text-link-hover: #12EACB;
+    --bullet-color: #12EACB;
 
     width: 100%;
-    background: var(--section-bg);
+    background: #FFFFFF;
     padding: clamp(3rem, 8vw, 6rem) 1.5rem;
     position: relative;
   }
 
-  /* Dark mode adjustments - same opacity approach */
+  /* Dark mode - exact values for dark theme */
   :global(.dark) .ai-services {
-    --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-bg-hover: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(255, 255, 255, 0.06);
+    --card-border-hover: rgba(255, 255, 255, 0.12);
+    --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.2);
     --card-shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+    --icon-bg: rgba(18, 234, 203, 0.1);
+    --icon-color: #12EACB;
+    --text-heading: #f8fafc;
+    --text-body: #94a3b8;
+    --text-link: #f8fafc;
+    --text-link-hover: #12EACB;
+    --bullet-color: #12EACB;
+    background: #0c1117;
   }
 
   .ai-services__container {
