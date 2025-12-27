@@ -7,7 +7,9 @@ import HeroSection from '../components/sections/HeroSection.astro';
 import ServiceCards from '../components/sections/ServiceCards.astro';
 import ProcessSection from '../components/sections/ProcessSection.astro';
 import SEOServicesGridV2 from '../components/sections/SEOServicesGridV2.astro';
+import AIServicesCards from '../components/sections/AIServicesCards.astro';
 import { skills } from '../data/skills';
+import { aiServices } from '../data/ai-services';
 
 // Transform skills to services format
 const services = skills.slice(0, 6).map(skill => ({
@@ -61,6 +63,13 @@ const services = skills.slice(0, 6).map(skill => ({
       <SEOServicesGridV2
         title="Search Optimization in the AI Era"
         subtitle="From traditional SEO to Generative Engine Optimization (GEO), I help brands stay visible across every search surface—whether it's Google, ChatGPT, Perplexity, or the next AI breakthrough."
+      />
+
+      <!-- AI Implementation Services -->
+      <AIServicesCards
+        title="AI Implementation Services"
+        subtitle="One-time installations that transform how your business operates. I build custom AI systems, automations, and tools tailored to your specific workflows and goals."
+        services={aiServices}
       />
 
       <!-- Process Section -->
